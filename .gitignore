@@ -1,0 +1,11 @@
+# ignore node_modules
+node_modules
+
+# ignore text files
+*.txt
+
+# ignore .env API secrets
+.env
+
+# ignore cache
+.cache
