@@ -132,7 +132,15 @@ async function getItemData(req, res, auctionHouseID) {
 
 app.post ('/items', async function (req,res) { 
     // console.log(req.body);
-    let auctionHouseID = 0;    
+    let auctionHouseID = 0;
+    if (req.body.itemID === '') {
+        res.status(400).json({ error: "Please enter an item ID."});
+        return;
+    }  
+    else if (req.body.quantity === '') {
+        res.status(400).json({ error: "Please enter a quantity."})
+        return;
+    }
     try {
         if (req.body.faction === "Alliance") {
             // console.log(auctionHouseList[req.body.realm][0]);
@@ -149,7 +157,7 @@ app.post ('/items', async function (req,res) {
             let iconStr = `${icon}`
             // console.log(iconStr);
             // console.log(itemData);
-            
+            console.log(req.body)
             if (itemData.status === 404) {
                 res.status(404).json({ error: "Item doesn't exist." });
             }
@@ -162,8 +170,9 @@ app.post ('/items', async function (req,res) {
                     itemData.minBuyout,
                     itemData.marketValue,
                     req.body.time,
-                    1,
-                    iconStr
+                    req.body.quantity,
+                    iconStr,
+                    itemData.minBuyout * req.body.quantity
                 )
                 .then(item => {
                     res.status(201).json(item);
@@ -266,6 +275,9 @@ app.put('/items/:_id', (req, res) => {
                     if (req.body.currentPrice !== item.currentPrice) {
                         update.currentPrice = req.body.currentPrice;
                     }
+                    if (req.body.currentPrice !== item.currentPrice || req.body.quantity !== item.quantity) {
+                        update.total = req.body.quantity * req.body.currentPrice;
+                    }
                     if (JSON.stringify(update) !== '{}') {
                         items.updateItem( { _id: req.params._id }, update )
                             .then(modifiedCount => {
@@ -279,7 +291,8 @@ app.put('/items/:_id', (req, res) => {
                                         currentPrice: req.body.currentPrice,
                                         marketPrice: req.body.marketPrice,
                                         time: req.body.time,
-                                        quantity: req.body.quantity
+                                        quantity: req.body.quantity,
+                                        total: req.body.quantity * req.body.currentPrice
                                     })
                                 } else {
                                     res.status(404).json({ Error: "Item was not found (Update)" });
@@ -300,7 +313,8 @@ app.put('/items/:_id', (req, res) => {
                             currentPrice: req.body.currentPrice,
                             marketPrice: req.body.marketPrice,
                             time: req.body.time,
-                            quantity: req.body.quantity
+                            quantity: req.body.quantity,
+                            total: req.body.quantity * req.body.currentPrice
                         })
                     }                        
                 }

@@ -58,6 +58,10 @@ const itemSchema = mongoose.Schema({
     },
     icon: {
         type: String
+    },
+    total: {
+        type: Number,
+        required: true
     }
 });
 
@@ -67,7 +71,7 @@ const Item = mongoose.model("Item", itemSchema);
 
 
 // CREATE model *****************************************
-const createItem = async ( name, itemID, realm, faction, currentPrice, marketPrice, time, quantity, icon ) => {
+const createItem = async ( name, itemID, realm, faction, currentPrice, marketPrice, time, quantity, icon, total ) => {
     const item = new Item({ 
         name: name, 
         itemID: itemID, 
@@ -77,7 +81,8 @@ const createItem = async ( name, itemID, realm, faction, currentPrice, marketPri
         marketPrice: marketPrice,
         time: time,
         quantity: quantity,
-        icon: icon
+        icon: icon,
+        total: total
     });
     return item.save();
 }
@@ -122,7 +127,7 @@ const updateItem = async (filter, update) => {
 };
 
 // REPLACE model *********************************************
-const replaceItem = async ( _id, name, itemID, realm, faction, currentPrice, marketPrice, time, quantity, icon  ) => {
+const replaceItem = async ( _id, name, itemID, realm, faction, currentPrice, marketPrice, time, quantity, icon, total  ) => {
     const result = await Item.replaceOne({_id: _id }, {
         name: name, 
         itemID: itemID, 
@@ -132,7 +137,8 @@ const replaceItem = async ( _id, name, itemID, realm, faction, currentPrice, mar
         marketPrice: marketPrice,
         time: time,
         quantity: quantity,
-        icon: icon
+        icon: icon,
+        total: total
     });
     return result.modifiedCount;
 }

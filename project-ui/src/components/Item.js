@@ -1,5 +1,4 @@
 import React from 'react';
-import { icons } from 'react-icons';
 import { TbTrash, TbEdit } from 'react-icons/tb';
 
 function priceToString(num) {
@@ -20,6 +19,7 @@ function Item({ item, onEdit, onDelete }) {
             <td>{priceToString(item.currentPrice)}</td>
             <td>{priceToString(item.marketPrice)}</td>
             <td>{item.quantity}</td>
+            <td>{priceToString(item.total)}</td>
             <td><TbEdit onClick={() => onEdit(item)} /></td>
             <td><TbTrash onClick={() => onDelete(item._id)} /></td>
         </tr>

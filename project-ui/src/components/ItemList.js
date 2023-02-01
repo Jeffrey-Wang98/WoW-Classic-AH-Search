@@ -15,6 +15,7 @@ function ItemList({ items, onDelete, onEdit }) {
                     <th>Current Price</th>
                     <th>Market Price</th>
                     <th>Quantity</th>
+                    <th>Item Total</th>
                     <th></th>
                     <th></th>
                 </tr>

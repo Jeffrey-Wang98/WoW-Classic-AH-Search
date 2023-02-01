@@ -10,11 +10,12 @@ export const CreatePage = () => {
     const [realm, setRealm]                     = useState('');
     const [itemID, setItemID]                   = useState('');
     const [faction, setFaction]                 = useState('');
+    const [quantity, setQuantity]               = useState('');
     
     const history = useHistory();
 
     const addItem = async () => {
-        const newItem = { realm, faction, itemID, };
+        const newItem = { realm, faction, itemID, quantity};
         const response = await fetch('/items', {
             method: 'post',
             body: JSON.stringify(newItem),
@@ -29,7 +30,7 @@ export const CreatePage = () => {
             alert(`Item does not exist or is not in the auction house. Please check if item ID is valid, status code = ${response.status}`);
         }
         else if (response.status === 400){
-            alert(`Please enter the realm and faction, status code = ${response.status}`);
+            alert(`Please enter the realm and faction or quantity, status code = ${response.status}`);
         }
         else {
             alert(`Could not add the item, status code = ${response.status}`);
@@ -46,6 +47,7 @@ export const CreatePage = () => {
                 You can search for an item you want to buy here! 
                 Please input the item ID by looking it up on <Link to={{ pathname: "https://wowhead.com/wotlk" }} target="_blank">wowhead.com/wotlk (new tab)</Link>. 
                 Choose the realm and faction of the auction house from which you want to look up price.
+                Set the quantity to know how much it will cost to buy x amount of that item.
             </p>
             <div>
             <img src="/images/example.png" width="1000"></img>
@@ -58,6 +60,7 @@ export const CreatePage = () => {
                                 <th>Realm Name</th>
                                 <th>Faction</th>
                                 <th>Item ID</th>
+                                <th>Quantity</th>
                                 {/* <th>Market Price</th>
                                 <th>Search Time</th> */}
                             </tr>
@@ -122,16 +125,17 @@ export const CreatePage = () => {
                                     onChange={e => setItemID(e.target.value)} 
                                     id="itemID" />      
                             </td>
-                            {/* <td>
+                            <td>
                                 <input
                                     type="number"
-                                    placeholder='100000'
-                                    value={marketPrice}
-                                    size="12"
-                                    onChange={e => setMarketPrice(e.target.value)}
-                                    id="marketPrice" />
+                                    placeholder='1'
+                                    value={quantity}
+                                    size="10"
+                                    min="1"
+                                    onChange={e => setQuantity(e.target.value)}
+                                    id="quantity" />
                             </td>
-                            <td>
+                            {/* <td>
                                 <input
                                     type="date"
                                     value={time}
