@@ -2,6 +2,7 @@ import React from 'react';
 import ItemList from '../components/ItemList';
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import Total from '../components/Total';
 
 function HomePage({ setItem }) {
     // Use the history for updating
@@ -15,6 +16,7 @@ function HomePage({ setItem }) {
         const response = await fetch('/items');
         const items = await response.json();
         setItems(items);
+        console.log(items)
     } 
     
 
@@ -61,6 +63,9 @@ function HomePage({ setItem }) {
                     items={items} 
                     onEdit={onEdit} 
                     onDelete={onDelete} 
+                />
+                <Total
+                    items={items}
                 />
             </article>
         </>

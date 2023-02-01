@@ -26,15 +26,19 @@ export const CreatePage = () => {
         if(response.status === 201){
             alert("Added a new item!");
         } 
-        else if (response.status === 404){
-            alert(`Item does not exist or is not in the auction house. Please check if item ID is valid, status code = ${response.status}`);
-        }
-        else if (response.status === 400){
-            alert(`Please enter the realm and faction or quantity, status code = ${response.status}`);
-        }
-        else {
-            alert(`Could not add the item, status code = ${response.status}`);
-        }
+        // else if (response.status === 404){
+        //     alert(`Item does not exist or is not in the auction house. Please check if item ID is valid, status code = ${response.status}`);
+        // }
+        // else if (response.status === 400){
+        //     alert(`Please enter the realm and faction or quantity, status code = ${response.status}`);
+        // }
+        // else {
+        //     alert(`Could not add the item, status code = ${response.status}`);
+        // }
+        else{
+            const errMessage = await response.json();
+            alert(`Could not search item. Status ${response.status}. ${errMessage.Error}`);
+        }        
         history.push("/");
     };
 

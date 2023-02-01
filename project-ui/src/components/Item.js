@@ -9,12 +9,13 @@ function priceToString(num) {
 }
 
 function Item({ item, onEdit, onDelete }) {
+    let realm = item.realm.replaceAll("_", " ");
     return (
         <tr>
             <td><img src={item.icon} width="50"></img></td>
             <td>{item.name}</td>
             <td>{item.itemID}</td>
-            <td>{item.realm}</td>
+            <td>{realm}</td>
             <td>{item.faction}</td>
             <td>{priceToString(item.currentPrice)}</td>
             <td>{priceToString(item.marketPrice)}</td>

@@ -34,7 +34,7 @@ export const EditPage = ({ item }) => {
             alert("You edited your shopping list!");
         } else {
             const errMessage = await response.json();
-            alert(`Could not update workout plan. Status ${response.status}. ${errMessage.Error}`);
+            alert(`Could not update item. Status ${response.status}. ${errMessage.Error}`);
         }
         history.push("/");
     }

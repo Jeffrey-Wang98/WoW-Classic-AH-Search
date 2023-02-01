@@ -125,7 +125,7 @@ async function getItemData(req, res, auctionHouseID) {
     
     catch (error) {
     // console.log(error);
-    res.status(400).json({ error: "Couldn't create document due to missing parameters." });  
+    res.status(400).json({ Error: "Couldn't create document due to missing parameters." });  
     }
 };
 
@@ -134,11 +134,11 @@ app.post ('/items', async function (req,res) {
     // console.log(req.body);
     let auctionHouseID = 0;
     if (req.body.itemID === '') {
-        res.status(400).json({ error: "Please enter an item ID."});
+        res.status(400).json({ Error: "Please enter an item ID."});
         return;
     }  
     else if (req.body.quantity === '') {
-        res.status(400).json({ error: "Please enter a quantity."})
+        res.status(400).json({ Error: "Please enter a quantity."})
         return;
     }
     try {
@@ -159,7 +159,7 @@ app.post ('/items', async function (req,res) {
             // console.log(itemData);
             console.log(req.body)
             if (itemData.status === 404) {
-                res.status(404).json({ error: "Item doesn't exist." });
+                res.status(404).json({ Error: "Item doesn't exist." });
             }
             else {
                 items.createItem(
@@ -179,17 +179,17 @@ app.post ('/items', async function (req,res) {
                 })
                 .catch(error => {
                     // console.log(error);
-                    res.status(404).json({ error: "Item doesn't exist." });
+                    res.status(404).json({ Error: "Item doesn't exist." });
                 });           
             }
              
         }
         catch(error){
-            res.status(404).json({ error: "Item doesn't exist." });
+            res.status(404).json({ Error: "Item doesn't exist." });
         }
     }
     catch(error) {
-        res.status(400).json({ error: "Please enter a Realm and Faction please." });
+        res.status(400).json({ Error: "Please enter a Realm and Faction please." });
     }
     
 });
@@ -252,15 +252,19 @@ app.put('/items/:_id', (req, res) => {
     // check if valid json
     if (req.body.quantity === undefined) {
         res.status(400).json({ Error: "Missing parameters for update"});
+        return;
     }
     else if (req.body.quantity <= 0) {
         res.status(400).json({ Error: "Please enter a positive quantity."});
+        return;
     }
     if (req.body.currentPrice === undefined) {
         res.status(400).json({ Error: "Missing parameters for update"});
+        return;
     }
     else if (req.body.currentPrice < 0) {
         res.status(400).json({ Error: 'Please enter a non-negative price.'});
+        return;
     }
     else {
         // console.log(req.body.quantity);
@@ -296,6 +300,7 @@ app.put('/items/:_id', (req, res) => {
                                     })
                                 } else {
                                     res.status(404).json({ Error: "Item was not found (Update)" });
+                                    return;
                                 }
                             })
                             .catch(error => {
@@ -320,6 +325,7 @@ app.put('/items/:_id', (req, res) => {
                 }
                 else {
                     res.status(404).json({ Error: "Item was not found (findByID)"})
+                    return;
                 }
 
             })

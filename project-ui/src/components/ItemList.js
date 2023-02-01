@@ -1,5 +1,6 @@
 import React from 'react';
 import Item from './Item';
+import Total from './Total';
 
 function ItemList({ items, onDelete, onEdit }) {
     return (
@@ -9,7 +10,7 @@ function ItemList({ items, onDelete, onEdit }) {
                 <tr>
                     <th></th>
                     <th>Name of Item</th>
-                    <th>Item ID</th>
+                    <th>ID</th>
                     <th>Realm</th>
                     <th>Faction</th>
                     <th>Current Price</th>
