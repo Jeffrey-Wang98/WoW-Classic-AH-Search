@@ -1,10 +1,12 @@
 import React from 'react';
 import ItemList from '../components/ItemList';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import Total from '../components/Total';
 
 function HomePage({ setItem }) {
+    const [, updateState] = useState();
+    const forceUpdate = useCallback(() => updateState({}), []);
     // Use the history for updating
     const history = useHistory();
 
@@ -16,7 +18,6 @@ function HomePage({ setItem }) {
         const response = await fetch('/items');
         const items = await response.json();
         setItems(items);
-        console.log(items)
     } 
     
 
@@ -50,6 +51,38 @@ function HomePage({ setItem }) {
         retrieve();
     }, []);
 
+    // Update ALL items
+    const onUpdate = async () => {
+        if (window.confirm('Are you sure you want to update all item prices? This is a very costly request.')) {
+            let itemsJSON = {}
+            for (let i = 0; i < items.length; i ++) {
+                itemsJSON[i] = items[i];
+            }
+            const itemsJSONstring = JSON.stringify(itemsJSON);
+
+            const response = await fetch('/update-all', { 
+                method: 'post', 
+                body: JSON.stringify(itemsJSON),
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+                if (response.status !== 200) {
+                    const errMessage = await response.json();
+                    alert(`Could not update all item prices. Status code = ${response.status}. ${errMessage.Error}`)
+                }
+                else {
+                    alert('Item prices were all updated!');
+                    // forceUpdate();
+
+                    // document.getElementById("list").contentWindow.location.reload(true);
+                    window.location.reload();
+                    // console.log('Success!')
+                }
+            
+        }
+    }
+
     // Show item
     return (
         <>
@@ -67,6 +100,7 @@ function HomePage({ setItem }) {
                 <Total
                     items={items}
                 />
+                <button className='update-all' onClick={onUpdate}>Update All</button>
             </article>
         </>
     );

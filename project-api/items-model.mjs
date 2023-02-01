@@ -123,6 +123,7 @@ const deleteByProperty = async (filter) => {
 // UPDATE model *****************************************
 const updateItem = async (filter, update) => {
     const result = await Item.updateOne(filter, update);
+    // console.log(filter, update);
     return result.modifiedCount;
 };
 

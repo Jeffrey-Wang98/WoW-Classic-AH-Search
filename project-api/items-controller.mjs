@@ -157,7 +157,7 @@ app.post ('/items', async function (req,res) {
             let iconStr = `${icon}`
             // console.log(iconStr);
             // console.log(itemData);
-            console.log(req.body)
+            // console.log(req.body)
             if (itemData.status === 404) {
                 res.status(404).json({ Error: "Item doesn't exist." });
             }
@@ -331,6 +331,94 @@ app.put('/items/:_id', (req, res) => {
             })
     }
     
+});
+
+// UPDATE ALL
+app.post('/update-all', async function (req, res) {
+    let pass = true;
+    let list = req.body;
+    let length = Object.keys(list).length;
+    // console.log(req.body)
+    console.log(Object.keys(list))
+    console.log(length)
+    for (let i=0; i < length; i++) {
+        const item = list[i];
+        items.findById(item._id)
+            .then(async document => {
+                if (document !== null) {
+                    let currentTime = Math.floor(new Date().getTime() / 1000);
+                    if (tsmAuthTokenStorage.access_token === '' || currentTime >=  tsmAuthTokenStorage.time_left){
+                        const authToken = await getAuthToken();
+                        tsmAuthTokenStorage.access_token = authToken.access_token;
+                        tsmAuthTokenStorage.time_left = currentTime + 86400;
+                    }
+                    const authToken = tsmAuthTokenStorage.access_token;
+
+                    let auctionHouseID = 0;
+                    if (req.body.faction === "Alliance") {
+                        auctionHouseID = auctionHouseList[item.realm][0];
+                    }
+                    else {
+                        auctionHouseID = auctionHouseList[item.realm][1];
+                    }
+                    const apiURL = `https://pricing-api.tradeskillmaster.com/ah/${auctionHouseID}/item/${item.itemID}`
+                    let newData = await fetch(apiURL, {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Bearer ${authToken}`,
+                        }
+                    });
+                    if (newData.status !== 200) {
+                        pass = false;
+                    }
+
+                    newData = await newData.json();
+                    // let newData = { minBuyout: 60, marketValue: 60};
+                    let update = {};
+                    // check if update changes anything
+                    if (item.currentPrice !== newData.minBuyout) {
+                        update.currentPrice = newData.minBuyout;
+                    }
+                    if (item.marketPrice !== newData.marketValue) {
+                        update.marketPrice = newData.marketValue;
+                    }
+                    if (item.currentPrice !== newData.minBuyout || item.marketPrice !== newData.marketValue) {
+                        update.total = newData.minBuyout * item.quantity;
+                    }
+                    // console.log(update);
+                    // console.log(item._id);
+                    if (JSON.stringify(update) !== '{}') {
+                        const documentID = item._id;
+                        items.updateItem( { _id: documentID }, update )
+                            .then(modifiedCount => {
+                                console.log(modifiedCount);
+                                if (modifiedCount === 1) {
+                                    pass = true;
+                                } else {
+                                    pass = false;
+                                    console.log(`Did not update ${i} because of updateItem`);
+                                }
+                            })
+                            .catch(error => {
+                                console.error(error);
+                                pass = false;
+                            });
+                    }
+                    
+                }
+                else{
+                    pass = false;
+                    console.log(`Did not update ${i} because of findById.`)
+                }
+            })
+    }
+    if (pass === true) {
+        res.status(200).json()
+    }
+    else {
+        // console.log('sent 400')
+        res.status(400).json({ Error: "Not all item prices can be updated."})
+    }
 });
 
 
