@@ -100,7 +100,7 @@ function HomePage({ setItem }) {
                 <Total
                     items={items}
                 />
-                <button className='update-all' onClick={onUpdate}>Update All</button>
+                <button id="update-all" className='update-all' onClick={onUpdate}>Update All</button>
             </article>
         </>
     );

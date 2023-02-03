@@ -339,8 +339,8 @@ app.post('/update-all', async function (req, res) {
     let list = req.body;
     let length = Object.keys(list).length;
     // console.log(req.body)
-    console.log(Object.keys(list))
-    console.log(length)
+    // console.log(Object.keys(list))
+    // console.log(length)
     for (let i=0; i < length; i++) {
         const item = list[i];
         items.findById(item._id)
