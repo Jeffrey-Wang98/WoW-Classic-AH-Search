@@ -1,11 +1,9 @@
 import React from 'react';
 import Item from './Item';
-import Total from './Total';
 
 function ItemList({ items, onDelete, onEdit }) {
     return (
         <table id="list">
-            <caption>Your Price List</caption>
             <thead>
                 <tr>
                     <th></th>

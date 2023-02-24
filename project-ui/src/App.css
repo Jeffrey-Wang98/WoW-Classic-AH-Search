@@ -261,6 +261,9 @@ td {
     font-size: larger;
     width: 15%
   }
+  .create {
+    margin-top:2%;
+  }
 
 colgroup {}
 data {}
@@ -309,6 +312,16 @@ label {
     background-color: var(--purp-accent);
     border-color: var(--bright-purp-accent);
     border-radius: 10px;
+  }
+  .link-button {
+    margin-left: 0%;
+    margin-top: 1%;
+    margin-bottom: 2%;
+  }
+  .link-button:hover {
+    margin-left: 0%;
+    margin-top: 1%;
+    margin-bottom: 2%;
   }
   input {
     color: var(--purp-white);

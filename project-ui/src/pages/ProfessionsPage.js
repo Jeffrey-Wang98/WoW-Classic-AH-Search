@@ -1,17 +1,31 @@
 import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
 import { Link } from 'react-router-dom';
+import ProfList from '../components/ProfList';
+import ProfTotal from '../components/ProfTotal';
+import LinkButton from '../components/LinkButton';
 
-export const ProfessionsPage = ({setItems}) =>  {
+export const ProfessionsPage = ( {profItems, setProfItems} ) =>  {
     return(
         <>
             <article>
                 <h2>
-                    Work in Progress!
+                    Professions Page
                 </h2>
+                
                 <p>
-                    Please come back when this page is done!
+                    Here, you can find all of the items you'll need and how much it'll cost you to go from level 1 to level 450!
+                    Keep in mind, since skill ups have a random chance at yellow or green, you may need to buy more or less of
+                    some items. This is unavoidable. Please plan on spending +/- 20% of the total cost. Do not leave or refresh this page.
+                    This will clear the profession list, and you will need to search for the items again.
                 </p>
+                <div><LinkButton to='../choose-profession'>Choose Profession</LinkButton></div>
+                <ProfList
+                    profItems={profItems}
+                />
+                <ProfTotal
+                    profItems={profItems}
+                />
             </article>
         </>
     );

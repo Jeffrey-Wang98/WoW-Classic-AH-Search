@@ -58,7 +58,6 @@ export const CreatePage = () => {
             </div>
             <form onSubmit={(e) => { e.preventDefault();}}>
                     <table class="create">
-                        <caption>Search your item!</caption>
                         <thead>
                             <tr>
                                 <th>Realm Name</th>

@@ -3,6 +3,7 @@ import ItemList from '../components/ItemList';
 import { useState, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import Total from '../components/Total';
+import LinkButton from '../components/LinkButton';
 
 function HomePage({ setItem }) {
     const [, updateState] = useState();
@@ -89,9 +90,10 @@ function HomePage({ setItem }) {
             <article>
                 <h2>Your Shopping List</h2>
                 <p>
-                    Here are all of the items you have searched up! To add more, please click on "Search Price" button above!
+                    Here are all of the items you have searched up! To add more, please click on "Search Price" button below!
                     The professions tab will give you all of the prices of items you may need to level a specific profession.
                 </p>
+                <LinkButton to="../search">Search Price</LinkButton>
                 <ItemList 
                     items={items} 
                     onEdit={onEdit} 

@@ -12,11 +12,13 @@ import HomePage from './pages/HomePage';
 import CreatePage from './pages/CreatePage';
 import EditPage from './pages/EditPage';
 import ProfessionsPage from './pages/ProfessionsPage';
+import ChooseProf from './pages/ChooseProf';
 
 // Define the function that renders the content in routes using State.
 function App() {
 
-  const [item, setItem] = useState([]);
+  const [item, setItem]           = useState([]);
+  const [profItems, setProfItems] = useState([]);
 
   return (
     <>
@@ -47,7 +49,11 @@ function App() {
             </Route>
 
             <Route path="/professions">
-              <ProfessionsPage />
+              <ProfessionsPage profItems={profItems} setProfItems={setProfItems}/>
+            </Route>
+
+            <Route path="/choose-profession">
+              <ChooseProf profItems={profItems} setProfItems={setProfItems}/>
             </Route>
           </main>
 
