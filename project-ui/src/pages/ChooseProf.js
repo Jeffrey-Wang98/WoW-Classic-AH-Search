@@ -10,6 +10,32 @@ export const ChooseProf = ( {profItems, setProfItems} ) => {
 
     const history = useHistory();
 
+    const auctionHouseList = {
+        Atiesh: [279, 280],
+        Myzrael: [281, 282],
+        Old_Blanchy: [283, 284],
+        Azuresong: [285, 286],
+        Mankrik: [287, 288],
+        Pagle: [289, 290],
+        Ashkandi: [293, 294],
+        Westfall: [295, 296],
+        Whitemane: [297, 298],
+        Faerlina: [311, 312],
+        Grobbulus: [317, 318],
+        Bloodsail_Buccaneers: [319, 320],
+        Remulos: [321, 322],
+        Arugal: [323, 324],
+        Yojamba: [325, 326],
+        Sulfuras: [343, 344],
+        Windseeker: [345, 346],
+        Benediction: [347, 348],
+        Earthfury: [351, 352],
+        Skyfury: [461, 462],
+        Maladath: [463, 464],
+        Eranikus: [471, 472],
+        Angerforge: [473, 474]
+    };
+
     const alchemy = {
         0: { 
             icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_evergreenmoss.jpg',
@@ -52,44 +78,85 @@ export const ChooseProf = ( {profItems, setProfItems} ) => {
         }
     }
 
-    const prices = {
-        0: 3899,
-        1: 11999,
-        2: 20499
-    }
-
     const chooseProf = async () => {
         const newProf = { realm, faction, prof };
         if (realm === "" || faction === "" || prof === "") {
             alert("Please enter a valid Realm, Faction, and/or Profession.")
         }
         else {
-            console.log(newProf);
+            // console.log(newProf);
             // console.log(setProfItems);
             let items = []
             let selectedArray = [];
             if ( prof === 'Alchemy' ) {
                 selectedArray = alchemy;
-                console.log('Alchemy');
+                // console.log('Alchemy');
             }
             else if ( prof === 'Blacksmithing' ) {
                 selectedArray = blacksmithing;
-                console.log('Blacksmithing');
+                // console.log('Blacksmithing');
             }
+
+            // console.log(items);
+            
+            // console.log(profItems)
+            // console.log(setProfItems)
+            
+            // Set auctionHouseID
+            let auctionHouseID = 298;
+            if (faction === "Alliance") {
+                // console.log(auctionHouseList[req.body.realm][0]);
+                auctionHouseID = auctionHouseList[realm][0];
+            }
+            else {
+                // console.log(auctionHouseList[req.body.realm][1]);
+                auctionHouseID = auctionHouseList[realm][1];
+            }
+
+            let itemsForMicro = [];
             for (let i in selectedArray) {
                 let item = {
                     icon: selectedArray[i].icon,
                     name: selectedArray[i].name,
-                    currentPrice: prices[i],
+                    itemId: selectedArray[i].itemId,
+                    auctionHouseId: auctionHouseID,
                     quantity: selectedArray[i].quantity,
                 };
                 // console.log(item);
-                items.push(item);
+                itemsForMicro.push(item);
             }
-            // console.log(items);
-            setProfItems(JSON.parse(JSON.stringify(items)));
-            console.log(profItems)
-            // console.log(setProfItems)
+            let apiPrices = await fetch(
+                "http://localhost:9000", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/JSON'
+                    },
+                    mode: 'cors',
+                    body: JSON.stringify(itemsForMicro)
+                })
+            
+            if (apiPrices.status === 200) {
+                alert("Your profession list has been generated!");
+                apiPrices = await apiPrices.json();
+                // console.log(apiPrices);
+
+                for (let i in selectedArray) {
+                    let item = {
+                        icon: selectedArray[i].icon,
+                        name: selectedArray[i].name,
+                        currentPrice: apiPrices[i],
+                        quantity: selectedArray[i].quantity,
+                    };
+                    // console.log(item);
+                    items.push(item);
+                }
+
+                setProfItems(JSON.parse(JSON.stringify(items)));
+            }
+            else {
+                alert("There was an error preventing the generation of the professsion list.")
+            }
+
             history.push('/professions');
         }
         

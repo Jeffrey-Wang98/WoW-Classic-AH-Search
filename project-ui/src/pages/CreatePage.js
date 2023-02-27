@@ -54,7 +54,7 @@ export const CreatePage = () => {
                 Set the quantity to know how much it will cost to buy x amount of that item.
             </p>
             <div>
-            <img src="/images/example.png" width="1000"></img>
+            <img src="/images/example.png" width="1000" alt="image of the url of an example item search on Wowhead."></img>
             </div>
             <form onSubmit={(e) => { e.preventDefault();}}>
                     <table class="create">
