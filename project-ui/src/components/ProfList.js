@@ -1,11 +1,18 @@
 import React from 'react';
 import ProfItem from './ProfItem';
-import ProfTotal from './ProfTotal';
 
-function ProfList( { profItems} ) {
+function ProfList( { profItems, profession, realm, faction} ) {
+    let tableCaption = ``;
+    if (profession === '' || realm === '' || faction === '') {
+        tableCaption = 'Your Profession List Here';
+    }
+    else {
+        realm = realm.replaceAll("_", " ");
+        tableCaption = `Your ${profession} List for ${realm} - ${faction}`;
+    }
     return (
         <table id="prof-list">
-            <caption>Your Profession List</caption>
+            <caption>{tableCaption}</caption>
             <thead>
                 <tr>
                     <th></th>

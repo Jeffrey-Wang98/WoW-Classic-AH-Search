@@ -1,13 +1,11 @@
 import React from 'react';
 import ItemList from '../components/ItemList';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect} from 'react';
 import { useHistory } from 'react-router-dom';
 import Total from '../components/Total';
 import LinkButton from '../components/LinkButton';
 
 function HomePage({ setItem }) {
-    const [, updateState] = useState();
-    const forceUpdate = useCallback(() => updateState({}), []);
     // Use the history for updating
     const history = useHistory();
 
@@ -59,7 +57,7 @@ function HomePage({ setItem }) {
             for (let i = 0; i < items.length; i ++) {
                 itemsJSON[i] = items[i];
             }
-            const itemsJSONstring = JSON.stringify(itemsJSON);
+            // const itemsJSONstring = JSON.stringify(itemsJSON);
 
             const response = await fetch('/update-all', { 
                 method: 'post', 

@@ -65,7 +65,7 @@ export const EditPage = ({ item }) => {
                             </tr>
                         </thead>
                         <tbody>
-                            <td><img src={item.icon} width="50"></img></td>
+                            <td><img src={item.icon} width="50" alt="item's icon"></img></td>
                             <td>
                                 {item.name}
                             </td>

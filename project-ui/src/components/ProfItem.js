@@ -13,7 +13,7 @@ function priceToString(num) {
 function ProfItem( { item }) {
     return(
         <tr>
-            <td><img src={item.icon} width="50"></img></td>
+            <td><img src={item.icon} width="50" alt="item's icon"></img></td>
             <td>{item.name}</td>
             <td>{priceToString(item.currentPrice)}</td>
             <td>{item.quantity}</td>

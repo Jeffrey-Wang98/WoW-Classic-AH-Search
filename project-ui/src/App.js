@@ -17,8 +17,11 @@ import ChooseProf from './pages/ChooseProf';
 // Define the function that renders the content in routes using State.
 function App() {
 
-  const [item, setItem]           = useState([]);
-  const [profItems, setProfItems] = useState([]);
+  const [item, setItem] =             useState([]);
+  const [profItems, setProfItems] =   useState([]);
+  const [profession, setProfession] = useState('');
+  const [realm, setRealm] =           useState('');
+  const [faction, setFaction] =       useState('');
 
   return (
     <>
@@ -49,11 +52,11 @@ function App() {
             </Route>
 
             <Route path="/professions">
-              <ProfessionsPage profItems={profItems} setProfItems={setProfItems}/>
+              <ProfessionsPage profItems={profItems} setProfItems={setProfItems} profession={profession} realm={realm} faction={faction}/>
             </Route>
 
             <Route path="/choose-profession">
-              <ChooseProf profItems={profItems} setProfItems={setProfItems}/>
+              <ChooseProf profItems={profItems} setProfItems={setProfItems} setProfession={setProfession} realm={realm} faction={faction} setRealm={setRealm} setFaction={setFaction}/>
             </Route>
           </main>
 

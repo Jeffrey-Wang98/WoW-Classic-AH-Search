@@ -15,7 +15,7 @@ function Item({ item, onEdit, onDelete }) {
     let realm = item.realm.replaceAll("_", " ");
     return (
         <tr>
-            <td><img src={item.icon} width="50"></img></td>
+            <td><img src={item.icon} width="50" alt="item's icon"></img></td>
             <td>{item.name}</td>
             <td>{item.itemID}</td>
             <td>{realm}</td>

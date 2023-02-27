@@ -2,10 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
 
 
-export const ChooseProf = ( {profItems, setProfItems} ) => {
-
-    const [realm, setRealm]                     = useState('');
-    const [faction, setFaction]                 = useState('');
+export const ChooseProf = ( {setProfItems, setProfession, realm, faction, setRealm, setFaction } ) => {
     const [prof, setProf]                       = useState('');
 
     const history = useHistory();
@@ -78,23 +75,217 @@ export const ChooseProf = ( {profItems, setProfItems} ) => {
         }
     }
 
+    const enchanting = {
+        0: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_whispervine.jpg',
+            name: "Lichbloom",
+            itemId: 36905,
+            quantity: 80
+        },
+        1: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_potion_07.jpg',
+            name: "Pygmy Oil",
+            itemId: 40195,
+            quantity: 80
+        },
+        2: { 
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_evergreenmoss.jpg',
+            name: "Adder's Tongue",
+            itemId: 36903,
+            quantity: 80
+        }
+    }
+
+    const engineering = {
+        0: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_whispervine.jpg',
+            name: "Lichbloom",
+            itemId: 36905,
+            quantity: 80
+        },
+        1: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_potion_07.jpg',
+            name: "Pygmy Oil",
+            itemId: 40195,
+            quantity: 80
+        },
+        2: { 
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_evergreenmoss.jpg',
+            name: "Adder's Tongue",
+            itemId: 36903,
+            quantity: 80
+        }
+    }
+
+    const inscription = {
+        0: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_whispervine.jpg',
+            name: "Lichbloom",
+            itemId: 36905,
+            quantity: 80
+        },
+        1: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_potion_07.jpg',
+            name: "Pygmy Oil",
+            itemId: 40195,
+            quantity: 80
+        },
+        2: { 
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_evergreenmoss.jpg',
+            name: "Adder's Tongue",
+            itemId: 36903,
+            quantity: 80
+        }
+    }
+
+    const jewelcrafting = {
+        0: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_whispervine.jpg',
+            name: "Lichbloom",
+            itemId: 36905,
+            quantity: 80
+        },
+        1: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_potion_07.jpg',
+            name: "Pygmy Oil",
+            itemId: 40195,
+            quantity: 80
+        },
+        2: { 
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_evergreenmoss.jpg',
+            name: "Adder's Tongue",
+            itemId: 36903,
+            quantity: 80
+        }
+    }
+
+    const leatherworking = {
+        0: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_whispervine.jpg',
+            name: "Lichbloom",
+            itemId: 36905,
+            quantity: 80
+        },
+        1: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_potion_07.jpg',
+            name: "Pygmy Oil",
+            itemId: 40195,
+            quantity: 80
+        },
+        2: { 
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_evergreenmoss.jpg',
+            name: "Adder's Tongue",
+            itemId: 36903,
+            quantity: 80
+        }
+    }
+
+    const tailoring = {
+        0: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_whispervine.jpg',
+            name: "Lichbloom",
+            itemId: 36905,
+            quantity: 80
+        },
+        1: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_potion_07.jpg',
+            name: "Pygmy Oil",
+            itemId: 40195,
+            quantity: 80
+        },
+        2: { 
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_evergreenmoss.jpg',
+            name: "Adder's Tongue",
+            itemId: 36903,
+            quantity: 80
+        }
+    }
+
+    const cooking = {
+        0: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_whispervine.jpg',
+            name: "Lichbloom",
+            itemId: 36905,
+            quantity: 80
+        },
+        1: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_potion_07.jpg',
+            name: "Pygmy Oil",
+            itemId: 40195,
+            quantity: 80
+        },
+        2: { 
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_evergreenmoss.jpg',
+            name: "Adder's Tongue",
+            itemId: 36903,
+            quantity: 80
+        }
+    }
+
+    const firstAid = {
+        0: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_whispervine.jpg',
+            name: "Lichbloom",
+            itemId: 36905,
+            quantity: 80
+        },
+        1: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_potion_07.jpg',
+            name: "Pygmy Oil",
+            itemId: 40195,
+            quantity: 80
+        },
+        2: { 
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_evergreenmoss.jpg',
+            name: "Adder's Tongue",
+            itemId: 36903,
+            quantity: 80
+        }
+    }
+
     const chooseProf = async () => {
-        const newProf = { realm, faction, prof };
         if (realm === "" || faction === "" || prof === "") {
             alert("Please enter a valid Realm, Faction, and/or Profession.")
         }
         else {
             // console.log(newProf);
             // console.log(setProfItems);
+            setProfession(prof);
             let items = []
             let selectedArray = [];
-            if ( prof === 'Alchemy' ) {
-                selectedArray = alchemy;
-                // console.log('Alchemy');
-            }
-            else if ( prof === 'Blacksmithing' ) {
-                selectedArray = blacksmithing;
-                // console.log('Blacksmithing');
+            switch (prof) {
+                case 'Alchemy':
+                    selectedArray = alchemy;
+                    break;
+                case 'Blacksmithing':
+                    selectedArray = blacksmithing;
+                    break;
+                case 'Enchanting':
+                    selectedArray = enchanting;
+                    break;
+                case 'Engineering':
+                    selectedArray = engineering;
+                    break;
+                case 'Inscription':
+                    selectedArray = inscription;
+                    break;
+                case 'Jewelcrafting':
+                    selectedArray = jewelcrafting;
+                    break;
+                case 'Leatherworking':
+                    selectedArray = leatherworking;
+                    break;
+                case 'Tailoring':
+                    selectedArray = tailoring;
+                    break;
+                case 'Cooking':
+                    selectedArray = cooking;
+                    break;
+                case 'First Aid':
+                    selectedArray = firstAid;
+                    break;
+                default:
+                    selectedArray = alchemy;
             }
 
             // console.log(items);
