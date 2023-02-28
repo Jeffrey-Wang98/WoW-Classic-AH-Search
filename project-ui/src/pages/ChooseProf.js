@@ -162,7 +162,7 @@ export const ChooseProf = ( {setProfItems, setProfession, realm, faction, setRea
         },
         21: {
             icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_mountainsilversage.jpg',
-            name: "Mountain Silversage or Dreamfoil or Golden Sansam",
+            name: "Mountain Silversage, Dreamfoil, or Golden Sansam",
             itemId: 13465,
             quantity: 15
         },
@@ -407,7 +407,7 @@ export const ChooseProf = ( {setProfItems, setProfession, realm, faction, setRea
             icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_elemental_crystal_water.jpg',
             name: "Crystallized Water",
             itemId: 37705,
-            quantity: 44
+            quantity: 4
         },
         22: {
             icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_platinum.jpg',
@@ -425,7 +425,7 @@ export const ChooseProf = ( {setProfItems, setProfession, realm, faction, setRea
             icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_elemental_eternal_water.jpg',
             name: "Eternal Water",
             itemId: 35622,
-            quantity: 53
+            quantity: 57
         },
         25: {
             icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_elemental_eternal_earth.jpg',
@@ -437,307 +437,620 @@ export const ChooseProf = ( {setProfItems, setProfession, realm, faction, setRea
 
     const enchanting = {
         0: { 
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_flower_02.jpg',
-            name: "Peacebloom",
-            itemId: 2447,
-            quantity: 65
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_enchant_duststrange.jpg',
+            name: "Strange Dust",
+            itemId: 10940,
+            quantity: 125
         },
         1: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_10.jpg',
-            name: "Silverleaf",
-            itemId: 765,
-            quantity: 65
-        },
-        2: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_root_01.jpg',
-            name: "Briarthorn",
-            itemId: 2450,
-            quantity: 100
-        },
-        3: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_01.jpg',
-            name: "Bruiseweed",
-            itemId: 2453,
-            quantity: 35
-        },
-        4: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_jewelry_talisman_03.jpg',
-            name: "Mageroyal",
-            itemId: 785,
-            quantity: 20
-        },
-        5: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_11.jpg',
-            name: "Stranglekelp",
-            itemId: 3820,
-            quantity: 50
-        },
-        6: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_root_02.jpg',
-            name: "Liferoot",
-            itemId: 3357,
-            quantity: 35
-        },
-        7: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_03.jpg',
-            name: "Kingsblood",
-            itemId: 3356,
-            quantity: 35
-        },
-        8: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_15.jpg',
-            name: "Goldthorn",
-            itemId: 3821,
-            quantity: 30
-        },
-        9: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_flower_01.jpg',
-            name: "Wild Steelbloom",
-            itemId: 3355,
-            quantity: 5
-        },
-        10: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_18.jpg',
-            name: "Sungrass",
-            itemId: 8838,
-            quantity: 75
-        },
-        11: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_08.jpg',
-            name: "Khadgar's Whisker",
-            itemId: 3358,
-            quantity: 15
-        },
-        12: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_iron.jpg',
-            name: "Iron Bar",
-            itemId: 3575,
-            quantity: 4
-        },
-        13: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_gem_sapphire_03.jpg',
-            name: "Black Vitriol",
-            itemId: 9262,
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_enchant_essencemagicsmall.jpg',
+            name: "Lesser Magic Essence",
+            itemId: 10938,
             quantity: 1
         },
-        14: {
+        2: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_enchant_essencemagiclarge.jpg',
+            name: "Greater Magic Essence",
+            itemId: 10939,
+            quantity: 12
+        },
+        3: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_enchant_essenceastralsmall.jpg',
+            name: "Lesser Astral Essence",
+            itemId: 10998,
+            quantity: 25
+        },
+        4: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_enchant_dustsoul.jpg',
+            name: "Soul Dust",
+            itemId: 11083,
+            quantity: 130
+        },
+        5: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_enchant_essenceastrallarge.jpg',
+            name: "Greater Astral Essence",
+            itemId: 11082,
+            quantity: 2
+        },
+        6: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_enchant_dustvision.jpg',
+            name: "Vision Dust",
+            itemId: 11137,
+            quantity: 240
+        },
+        7: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_enchant_essencemysticallarge.jpg',
+            name: "Greater Mystic Essence",
+            itemId: 11135,
+            quantity: 2
+        },
+        8: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_enchant_essencenethersmall.jpg',
+            name: "Lesser Nether Essence",
+            itemId: 11174,
+            quantity: 5
+        },
+        9: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_enchant_dustdream.jpg',
+            name: "Dream Dust",
+            itemId: 11176,
+            quantity: 195
+        },
+        10: {
             icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_17.jpg',
             name: "Purple Lotus",
             itemId: 8831,
-            quantity: 4
+            quantity: 40
+        },
+        11: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_enchant_dustillusion.jpg',
+            name: "Illusion Dust",
+            itemId: 16204,
+            quantity: 82
+        },
+        12: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_enchant_essenceeternallarge.jpg',
+            name: "Greater Eternal Essence",
+            itemId: 16203,
+            quantity: 8
+        },
+        13: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_enchant_shardbrilliantlarge.jpg',
+            name: "Large Brilliant Shard",
+            itemId: 14344,
+            quantity: 8
+        },
+        14: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_staff_01.jpg',
+            name: "Silver Rod",
+            itemId: 6338,
+            quantity: 1
         },
         15: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_19.jpg',
-            name: "Firebloom",
-            itemId: 4625,
-            quantity: 4
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_staff_10.jpg',
+            name: "Golden Rod",
+            itemId: 11128,
+            quantity: 1
         },
         16: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_13.jpg',
-            name: "Arthas' Tears",
-            itemId: 8836,
-            quantity: 45
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_gem_pearl_02.jpg',
+            name: "Iridescent Pearl",
+            itemId: 5500,
+            quantity: 1
         },
         17: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_14.jpg',
-            name: "Blindweed",
-            itemId: 8839,
-            quantity: 60
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_staff_11.jpg',
+            name: "Truesilver Rod",
+            itemId: 11144,
+            quantity: 1
         },
         18: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_sansamroot.jpg',
-            name: "Golden Sansam",
-            itemId: 13464,
-            quantity: 75
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_gem_pearl_01.jpg',
+            name: "Black Pearl",
+            itemId: 7971,
+            quantity: 1
         },
         19: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_mountainsilversage.jpg',
-            name: "Mountain Silversage",
-            itemId: 13465,
-            quantity: 40
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_staff_19.jpg',
+            name: "Arcanite Rod",
+            itemId: 16206,
+            quantity: 1
         },
         20: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_felweed.jpg',
-            name: "Felweed",
-            itemId: 22785,
-            quantity: 35
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_gem_pearl_04.jpg',
+            name: "Golden Pearl",
+            itemId: 13926,
+            quantity: 1
         },
         21: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_mountainsilversage.jpg',
-            name: "Mountain Silversage or Dreamfoil or Golden Sansam",
-            itemId: 13465,
-            quantity: 15
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_rod_felsteel.jpg',
+            name: "Fel Iron Rod",
+            itemId: 25843,
+            quantity: 1
         },
         22: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_sansamroot.jpg',
-            name: "Golden Sansam",
-            itemId: 13464,
-            quantity: 30
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_enchant_dustarcane.jpg',
+            name: "Arcane Dust",
+            itemId: 22445,
+            quantity: 350
         },
         23: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_terrocone.jpg',
-            name: "Terocone",
-            itemId: 22789,
-            quantity: 5
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_enchant_essencearcanesmall.jpg',
+            name: "Lesser Planar Essence",
+            itemId: 22447,
+            quantity: 2
         },
         24: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_dreamingglory.jpg',
-            name: "Dreaming Glory",
-            itemId: 22786,
-            quantity: 45
-        },
-        25: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_netherbloom.jpg',
-            name: "Netherbloom",
-            itemId: 22791,
-            quantity: 10
-        },
-        26: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_talandrasrose.jpg',
-            name: "Talandra's Rose",
-            itemId: 36907,
-            quantity: 24
-        },
-        27: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_fish_55.jpg',
-            name: "Pygmy Suckerfish",
-            itemId: 40199,
-            quantity: 5
-        },
-        28: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_goldclover.jpg',
-            name: "Goldclover",
-            itemId: 36901,
-            quantity: 90
-        },
-        29: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_tigerlily.jpg',
-            name: "Tiger Lily",
-            itemId: 36904,
-            quantity: 35
-        },
-        30: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_evergreenmoss.jpg',
-            name: "Adder's Tongue",
-            itemId: 36903,
-            quantity: 34
-        },
-        31: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_icethorn.jpg',
-            name: "Icethorn",
-            itemId: 36906,
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_enchant_essencearcanelarge.jpg',
+            name: "Greater Planar Essence",
+            itemId: 22446,
             quantity: 20
         },
+        25: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_nightmarevine.jpg',
+            name: "Nightmare Vine",
+            itemId: 22792,
+            quantity: 15
+        },
+        26: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_enchant_shardprismaticlarge.jpg',
+            name: "Large Prismatic Shard",
+            itemId: 22449,
+            quantity: 13
+        },
+        27: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_rod_adamantite.jpg',
+            name: "Adamantite Rod",
+            itemId: 25844,
+            quantity: 1
+        },
+        28: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/spell_nature_lightningoverload.jpg',
+            name: "Primal Might",
+            itemId: 23571,
+            quantity: 1
+        },
+        29: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_rod_eternium.jpg',
+            name: "Eternium Rod",
+            itemId: 25845,
+            quantity: 1
+        },
+        30: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_dust_infinite.jpg',
+            name: "Infinite Dust",
+            itemId: 34054,
+            quantity: 742
+        },
+        31: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_enchant_essencecosmicgreater.jpg',
+            name: "Greater Cosmic Essence",
+            itemId: 34055,
+            quantity: 47
+        },
         32: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_whispervine.jpg',
-            name: "Lichbloom",
-            itemId: 36905,
-            quantity: 40
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_enchant_dreamshard_02.jpg',
+            name: "Dream Shard",
+            itemId: 34052,
+            quantity: 60
         },
         33: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_yoggthorite.jpg',
-            name: "Saronite Bar",
-            itemId: 36913,
-            quantity: 56
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_elemental_eternal_earth.jpg',
+            name: "Eternal Earth",
+            itemId: 35624,
+            quantity: 134
         },
         34: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_jewelcrafting_gem_12.jpg',
-            name: "Bloodstone or Dark Jade",
-            itemId: 36917,
-            quantity: 5
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_elemental_crystal_water.jpg',
+            name: "Crystallized Water",
+            itemId: 37705,
+            quantity: 10
         },
         35: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_jewelcrafting_gem_10.jpg',
-            name: "Chalcedony or Huge Citrine",
-            itemId: 36923,
-            quantity: 5
-        },
-        36: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_elemental_eternal_air.jpg',
-            name: "Eternal Air or Eternal Fire",
-            itemId: 35623,
-            quantity: 5
-        },
-        37: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_icethorn.jpg',
-            name: "Icethorn",
-            itemId: 36906,
-            quantity: 105
-        },
-        38: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_potion_07.jpg',
-            name: "Pygmy Oil",
-            itemId: 40195,
-            quantity: 45
-        },
-        39: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_frostlotus.jpg',
-            name: "Frost Lotus",
-            itemId: 36908,
-            quantity: 15
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_rod_platinum.jpg',
+            name: "Titanium Rod",
+            itemId: 41745,
+            quantity: 1
         }
     }
 
     const engineering = {
-        0: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_whispervine.jpg',
-            name: "Lichbloom",
-            itemId: 36905,
-            quantity: 80
+        0: { 
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_stone_06.jpg',
+            name: "Rough Stone",
+            itemId: 2835,
+            quantity: 60
         },
         1: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_potion_07.jpg',
-            name: "Pygmy Oil",
-            itemId: 40195,
-            quantity: 80
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_02.jpg',
+            name: "Copper Bar",
+            itemId: 2840,
+            quantity: 66
         },
-        2: { 
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_evergreenmoss.jpg',
-            name: "Adder's Tongue",
-            itemId: 36903,
-            quantity: 80
+        2: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_stone_09.jpg',
+            name: "Coarse Stone",
+            itemId: 2836,
+            quantity: 60
+        },
+        3: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_fabric_linen_01.jpg',
+            name: "Linen Cloth",
+            itemId: 2589,
+            quantity: 50
+        },
+        4: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_01.jpg',
+            name: "Silver Bar",
+            itemId: 2842,
+            quantity: 5
+        },
+        5: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_bronze.jpg',
+            name: "Bronze Bar",
+            itemId: 2841,
+            quantity: 110
+        },
+        6: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_stone_12.jpg',
+            name: "Heavy Stone",
+            itemId: 3820,
+            quantity: 60
+        },
+        7: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_fabric_wool_01.jpg',
+            name: "Wool Cloth",
+            itemId: 2592,
+            quantity: 60
+        },
+        8: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_leatherscrap_05.jpg',
+            name: "Medium Leather",
+            itemId: 2319,
+            quantity: 15
+        },
+        9: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_steel.jpg',
+            name: "Steel Bar",
+            itemId: 3859,
+            quantity: 4
+        },
+        10: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_stone_10.jpg',
+            name: "Solid Stone",
+            itemId: 7912,
+            quantity: 120
+        },
+        11: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_06.jpg',
+            name: "Mithril Bar",
+            itemId: 3860,
+            quantity: 170
+        },
+        12: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_fabric_mageweave_01.jpg',
+            name: "Mageweave Cloth",
+            itemId: 4338,
+            quantity: 20
+        },
+        13: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_stonetablet_07.jpg',
+            name: "Dense Stone",
+            itemId: 12365,
+            quantity: 60
+        },
+        14: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_07.jpg',
+            name: "Thorium Bar",
+            itemId: 12359,
+            quantity: 135
+        },
+        15: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_fabric_purplefire_01.jpg',
+            name: "Runecloth",
+            itemId: 14047,
+            quantity: 35
+        },
+        16: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_feliron.jpg',
+            name: "Fel Iron Bar",
+            itemId: 23445,
+            quantity: 70
+        },
+        17: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_elemental_mote_earth01.jpg',
+            name: "Mote of Earth",
+            itemId: 22573,
+            quantity: 40
+        },
+        18: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_elemental_mote_fire01.jpg',
+            name: "Mote of Fire",
+            itemId: 22574,
+            quantity: 20
+        },
+        19: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_fabric_netherweave.jpg',
+            name: "Netherweave Cloth",
+            itemId: 21877,
+            quantity: 70
+        },
+        20: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_10.jpg',
+            name: "Adamantite Bar",
+            itemId: 23446,
+            quantity: 40
+        },
+        21: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_cobalt.jpg',
+            name: "Cobalt Bar",
+            itemId: 36916,
+            quantity: 280
+        },
+        22: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_yoggthorite.jpg',
+            name: "Saronite Bar",
+            itemId: 36913,
+            quantity: 555
+        },
+        23: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_fabric_soulcloth.jpg',
+            name: "Frostweave Cloth",
+            itemId: 33470,
+            quantity: 7
+        },
+        24: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_elemental_crystal_water.jpg',
+            name: "Crystallized Water",
+            itemId: 37705,
+            quantity: 8
+        },
+        25: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_elemental_eternal_water.jpg',
+            name: "Eternal Water",
+            itemId: 35622,
+            quantity: 6
+        },
+        26: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_elemental_eternal_earth.jpg',
+            name: "Eternal Earth",
+            itemId: 35624,
+            quantity: 1
+        },
+        27: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_elemental_crystal_fire.jpg',
+            name: "Crystallized Fire",
+            itemId: 37702,
+            quantity: 5
+        },
+        28: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_elemental_eternal_fire.jpg',
+            name: "Eternal Fire",
+            itemId: 36860,
+            quantity: 1
+        },
+        29: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_leatherscrap_15.jpg',
+            name: "Borean Leather",
+            itemId: 33568,
+            quantity: 14
+        },
+        30: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_elemental_eternal_shadow.jpg',
+            name: "Eternal Shadow",
+            itemId: 35627,
+            quantity: 7
         }
     }
 
     const inscription = {
-        0: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_whispervine.jpg',
-            name: "Lichbloom",
-            itemId: 36905,
-            quantity: 80
+        0: { 
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_07.jpg',
+            name: "Earthroot, Peacebloom, or Silverleaf",
+            itemId: 2449,
+            quantity: 120
         },
         1: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_potion_07.jpg',
-            name: "Pygmy Oil",
-            itemId: 40195,
-            quantity: 80
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_jewelry_talisman_03.jpg',
+            name: "Mageroyal, Briarthorn, Bruiseweed, Stranglekelp, or Swiftthistle",
+            itemId: 785,
+            quantity: 110
         },
-        2: { 
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_evergreenmoss.jpg',
-            name: "Adder's Tongue",
-            itemId: 36903,
-            quantity: 80
+        2: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_root_02.jpg',
+            name: "Liferoot, Grave Moss, Kingsblood, or Wild Steelbloom",
+            itemId: 3357,
+            quantity: 170
+        },
+        3: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_15.jpg',
+            name: "Goldthorn, Khadgar's Whiskers, Fadeleaf, or Wintersbite",
+            itemId: 3821,
+            quantity: 180
+        },
+        4: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_19.jpg',
+            name: "Firebloom, Arthas' Tears, Blindweed, Ghost Mushroom, Gromsblood, Purple Lotus, or Sungrass",
+            itemId: 4625,
+            quantity: 240
+        },
+        5: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_dreamfoil.jpg',
+            name: "Dreamfoil, Golden Sansam, Icecap, Mountain Silversage, or Plaguebloom",
+            itemId: 13463,
+            quantity: 120
+        },
+        6: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_ancientlichen.jpg',
+            name: "Ancient Lichen, Felweed, Ragveil, Terocone, Nightmare Vine, Netherbloom, Mana Thistle, or Dreaming Glory",
+            itemId: 22790,
+            quantity: 180
+        },
+        7: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_tigerlily.jpg',
+            name: "Tiger Lily, Icethorn, Lichbloom, Fire Leaf, Fire Seed, Adder's Tongue, Deadnettle, Goldclover, or Talandra's Rose",
+            itemId: 36904,
+            quantity: 500
         }
     }
 
     const jewelcrafting = {
         0: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_whispervine.jpg',
-            name: "Lichbloom",
-            itemId: 36905,
-            quantity: 80
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_02.jpg',
+            name: "Copper Bar",
+            itemId: 2840,
+            quantity: 110
         },
         1: {
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_potion_07.jpg',
-            name: "Pygmy Oil",
-            itemId: 40195,
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_gem_emerald_03.jpg',
+            name: "Malachite or Tigerseye",
+            itemId: 774,
+            quantity: 15
+        },
+        2: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_bronze.jpg',
+            name: "Bronze Bar",
+            itemId: 2841,
+            quantity: 120
+        },
+        3: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_01.jpg',
+            name: "Silver Bar",
+            itemId: 2842,
+            quantity: 40
+        },
+        4: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_gem_amethyst_01.jpg',
+            name: "Shadowgem",
+            itemId: 1210,
+            quantity: 20
+        },
+        5: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_stone_12.jpg',
+            name: "Heavy Stone",
+            itemId: 3820,
             quantity: 80
         },
-        2: { 
-            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_evergreenmoss.jpg',
-            name: "Adder's Tongue",
-            itemId: 36903,
+        // Left off here: Need Lesser Moonstone
+        6: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_03.jpg',
+            name: "Gold Bar",
+            itemId: 3577,
+            quantity: 5
+        },
+        7: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_iron.jpg',
+            name: "Iron Bar",
+            itemId: 3575,
+            quantity: 230
+        },
+        8: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_steel.jpg',
+            name: "Steel Bar",
+            itemId: 3859,
+            quantity: 190
+        },
+        9: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_gem_opal_02.jpg',
+            name: "Citrine",
+            itemId: 3864,
+            quantity: 10
+        },
+        10: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_stone_10.jpg',
+            name: "Solid Stone",
+            itemId: 7912,
+            quantity: 120
+        },
+        11: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_fabric_mageweave_01.jpg',
+            name: "Mageweave Cloth",
+            itemId: 4338,
+            quantity: 150
+        },
+        12: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_06.jpg',
+            name: "Mithril Bar",
+            itemId: 3860,
+            quantity: 240
+        },
+        13: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_stonetablet_07.jpg',
+            name: "Dense Stone",
+            itemId: 12365,
+            quantity: 20
+        },
+        14: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_07.jpg',
+            name: "Thorium Bar",
+            itemId: 12359,
+            quantity: 420
+        },
+        15: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_leatherscrap_02.jpg',
+            name: "Rugged Leather",
+            itemId: 8170,
             quantity: 80
+        },
+        16: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_feliron.jpg',
+            name: "Fel Iron Bar",
+            itemId: 23445,
+            quantity: 170
+        },
+        17: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_fabric_netherweave.jpg',
+            name: "Netherweave Cloth",
+            itemId: 21877,
+            quantity: 10
+        },
+        18: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_10.jpg',
+            name: "Adamantite Bar",
+            itemId: 23446,
+            quantity: 90
+        },
+        19: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_cobalt.jpg',
+            name: "Cobalt Bar (Farm Plans: Reinforced Cobalt Chestpiece)",
+            itemId: 36916,
+            quantity: 408
+        },
+        20: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_yoggthorite.jpg',
+            name: "Saronite Bar",
+            itemId: 36913,
+            quantity: 633
+        },
+        21: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_elemental_crystal_water.jpg',
+            name: "Crystallized Water",
+            itemId: 37705,
+            quantity: 4
+        },
+        22: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_platinum.jpg',
+            name: "Titanium Bar",
+            itemId: 41163,
+            quantity: 7
+        },
+        23: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_elemental_eternal_shadow.jpg',
+            name: "Eternal Shadow",
+            itemId: 35627,
+            quantity: 13
+        },
+        24: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_elemental_eternal_water.jpg',
+            name: "Eternal Water",
+            itemId: 35622,
+            quantity: 57
+        },
+        25: {
+            icon: 'https://render.worldofwarcraft.com/classic-us/icons/56/inv_elemental_eternal_earth.jpg',
+            name: "Eternal Earth",
+            itemId: 35624,
+            quantity: 13
         }
     }
 

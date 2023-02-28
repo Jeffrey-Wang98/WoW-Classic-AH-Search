@@ -24,7 +24,7 @@ export const ProfessionsPage = ( {profItems, profession, realm, faction} ) =>  {
                 <p>
                     Keep in mind, since skill ups have a random chance at yellow or green, you may need to buy more or less of
                     some items. This is unavoidable. Please plan on spending +/- 20% of the total cost. Cost of vendor materials (such as vials)
-                    not included in the price.
+                    not included in the price. Recipes not included in the total.
                 </p>
                 <p>
                     Do not refresh this page. This will clear the profession list, and you will need to search for the items again.
