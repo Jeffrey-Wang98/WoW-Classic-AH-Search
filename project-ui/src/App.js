@@ -31,8 +31,7 @@ function App() {
             <h1>WoW WotLK Classic Item Price Search</h1>
             <p>
               Did you want to find out what an item costs without logging into your character? Did you want to calculate how much
-              leveling one of professions from 1-450 will cost? Did you want to calculate how much it will cost to make X amount of consumes
-              with current auction house prices? You've come to the right place!
+              leveling one of professions from 1-450 will cost? You've come to the right place!
               </p>
           </header>
 

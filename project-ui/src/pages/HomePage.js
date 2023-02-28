@@ -52,12 +52,11 @@ function HomePage({ setItem }) {
 
     // Update ALL items
     const onUpdate = async () => {
-        if (window.confirm('Are you sure you want to update all item prices? This is a very costly request.')) {
+        if (window.confirm('Are you sure you want to update all item prices? This is a very costly request. This will also force-reset page, clearing any previous profession searches.')) {
             let itemsJSON = {}
             for (let i = 0; i < items.length; i ++) {
                 itemsJSON[i] = items[i];
             }
-            // const itemsJSONstring = JSON.stringify(itemsJSON);
 
             const response = await fetch('/update-all', { 
                 method: 'post', 
@@ -72,11 +71,8 @@ function HomePage({ setItem }) {
                 }
                 else {
                     alert('Item prices were all updated!');
-                    // forceUpdate();
 
-                    // document.getElementById("list").contentWindow.location.reload(true);
                     window.location.reload();
-                    // console.log('Success!')
                 }
             
         }

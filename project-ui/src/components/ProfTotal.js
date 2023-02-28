@@ -7,7 +7,7 @@ function priceToString(num) {
     gold = (gold).toLocaleString('en-US', {useGrouping:true});
     silver = (silver).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
     copper = (copper).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
-    return(`${gold}g ${silver}s ${copper}c`);
+    return([gold, silver, copper]);
 }
 
 function ProfTotal( { profItems }) {
@@ -15,7 +15,7 @@ function ProfTotal( { profItems }) {
     for (let i = 0; i < profItems.length; i++) {
         totalCost = totalCost + (profItems[i]['currentPrice'] * profItems[i]['quantity']);
     }
-    const totalStr = priceToString(totalCost)
+    const costStrings = priceToString(totalCost);
 
     return(
         <>
@@ -25,7 +25,16 @@ function ProfTotal( { profItems }) {
             <td></td>
             <td></td>
             <td>Total Cost</td>
-            <td>{totalStr}</td>
+            <td>
+                {costStrings[0]}
+                <img src='/images/Gold.webp' alt='gold icon'></img>
+                <span> </span>
+                {costStrings[1]}
+                <img src='/images/Silver.webp' alt='silver icon'></img>
+                <span> </span>
+                {costStrings[2]}
+                <img src='/images/Copper.webp' alt='copper icon'></img>
+            </td>
             </tbody>
         </table>
         </>

@@ -16,11 +16,6 @@ const client = new Client (
 
 const app = express();
 
-// const client = new Client (
-//    process.env.BATTLE_NET_CLIENT_ID,
-//    process.env.BATTLE_NET_CLIENT_SECRET
-// );
-
 const PORT = process.env.PORT;
 const tsmID = process.env.TSM_CLIENT_ID;
 
@@ -93,20 +88,19 @@ async function getItem(req, res) {
 };
 
 async function getItemData(req, res, auctionHouseID) {
+    // get time to check how old auth token is
     let currentTime = Math.floor(new Date().getTime() / 1000);
-    // console.log(`The time is ${currentTime}`);
+
+    // if auth token expired, get a new one and save it with expiration timer
+    // also get new auth token if there is no old token
     if (tsmAuthTokenStorage.access_token === '' || currentTime >=  tsmAuthTokenStorage.time_left){
         const authToken = await getAuthToken();
         tsmAuthTokenStorage.access_token = authToken.access_token;
         tsmAuthTokenStorage.time_left = currentTime + 86400;
     }
     const authToken = tsmAuthTokenStorage.access_token;
-    // console.log(authToken);
-    // console.log(tsmAuthTokenStorage);
-    
     const apiURL = `https://pricing-api.tradeskillmaster.com/ah/${auctionHouseID}/item/${req.body.itemID}`
-    // console.log(apiURL);
-
+    
     try {
         return await fetch(apiURL, {
             method: 'GET',
@@ -116,22 +110,19 @@ async function getItemData(req, res, auctionHouseID) {
             redirect: 'follow'
         })
             .then(response => {
-                // response.json();
-                // console.log(response);   
                 return(response.json());
             })
             .catch(error => console.log('error', error));
     }
     
     catch (error) {
-    // console.log(error);
-    res.status(400).json({ Error: "Couldn't create document due to missing parameters." });  
+        res.status(400).json({ Error: "Couldn't create document due to missing parameters." });  
     }
 };
 
 
+// BIG function to add item to list
 app.post ('/items', async function (req,res) { 
-    // console.log(req.body);
     let auctionHouseID = 0;
     if (req.body.itemID === '') {
         res.status(400).json({ Error: "Please enter an item ID."});
@@ -143,11 +134,9 @@ app.post ('/items', async function (req,res) {
     }
     try {
         if (req.body.faction === "Alliance") {
-            // console.log(auctionHouseList[req.body.realm][0]);
             auctionHouseID = auctionHouseList[req.body.realm][0];
         }
         else {
-            // console.log(auctionHouseList[req.body.realm][1]);
             auctionHouseID = auctionHouseList[req.body.realm][1];
         }
         try {
@@ -155,9 +144,7 @@ app.post ('/items', async function (req,res) {
             const item = await getItem(req, res);
             let icon = await item.getIcon();
             let iconStr = `${icon}`
-            // console.log(iconStr);
-            // console.log(itemData);
-            // console.log(req.body)
+
             if (itemData.status === 404) {
                 res.status(404).json({ Error: "Item doesn't exist." });
             }
@@ -338,9 +325,6 @@ app.post('/update-all', async function (req, res) {
     let pass = true;
     let list = req.body;
     let length = Object.keys(list).length;
-    // console.log(req.body)
-    // console.log(Object.keys(list))
-    // console.log(length)
     for (let i=0; i < length; i++) {
         const item = list[i];
         items.findById(item._id)
@@ -373,7 +357,6 @@ app.post('/update-all', async function (req, res) {
                     }
 
                     newData = await newData.json();
-                    // let newData = { minBuyout: 60, marketValue: 60};
                     let update = {};
                     // check if update changes anything
                     if (item.currentPrice !== newData.minBuyout) {
@@ -385,8 +368,6 @@ app.post('/update-all', async function (req, res) {
                     if (item.currentPrice !== newData.minBuyout || item.marketPrice !== newData.marketValue) {
                         update.total = newData.minBuyout * item.quantity;
                     }
-                    // console.log(update);
-                    // console.log(item._id);
                     if (JSON.stringify(update) !== '{}') {
                         const documentID = item._id;
                         items.updateItem( { _id: documentID }, update )
@@ -416,7 +397,6 @@ app.post('/update-all', async function (req, res) {
         res.status(200).json()
     }
     else {
-        // console.log('sent 400')
         res.status(400).json({ Error: "Not all item prices can be updated."})
     }
 });
