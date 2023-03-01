@@ -119,6 +119,7 @@ export const ChooseProf = ( {setProfItems, setProfession, realm, faction, setRea
                 };
                 itemsForMicro.push(item);
             }
+        return itemsForMicro;
     }
 
     // generate profession item price list
@@ -134,7 +135,8 @@ export const ChooseProf = ( {setProfItems, setProfession, realm, faction, setRea
             const auctionHouseID = getAHID();            
 
             // create list to send to micro-service
-            let apiPrices = await getPrices(createListForMicro(selectedArray, auctionHouseID));
+            const listForMicro = createListForMicro(selectedArray, auctionHouseID);
+            let apiPrices = await getPrices(listForMicro);
 
             // handle success or errors
             if (apiPrices.status === 200) {
@@ -157,7 +159,6 @@ export const ChooseProf = ( {setProfItems, setProfession, realm, faction, setRea
             </p>
             <form onSubmit={(e)=>{e.preventDefault();}}>
                 <table class="choose">
-                    <caption>Choose Your Profession!</caption>
                     <thead>
                         <tr>
                             <th>Realm Name</th>
