@@ -63,7 +63,6 @@ async function getAuthToken() {
         scope: "app:realm-api app:pricing-api",
         token: tsmID
     }
-    // console.log(tsmJSON);
 
     return fetch('https://auth.tradeskillmaster.com/oauth2/token', {
         method: 'POST',
@@ -79,13 +78,23 @@ async function getAuthToken() {
         .catch(error => console.log('error', error));
 };
 
-async function getItem(itemID) {
-    let item = await client.wow.classic.getItemById(itemID);
+async function getItemNameIcon(itemID) {
+    const item = await client.wow.classic.getItemById(itemID);
     console.log(item)
-    return(item);
+
+    // handle the situation where Blizzard's API is down
+    if (item == null) {
+        const name = "Placeholder Name (Thanks, Blizzard)";
+        const icon = "https://wow.zamimg.com/images/wow/icons/large/trade_engineering.jpg";
+        return([name, icon]);
+    }
+    const icon = item.getIcon();
+    return([item.name, icon]);
 };
 
-async function getItemData(req, res, auctionHouseID) {
+
+// checks if there is a saved, non-expired auth token and returns the old or new auth token
+async function checkAuthToken() {
     // get time to check how old auth token is
     let currentTime = Math.floor(new Date().getTime() / 1000);
 
@@ -97,7 +106,14 @@ async function getItemData(req, res, auctionHouseID) {
         tsmAuthTokenStorage.time_left = currentTime + 86400;
     }
     const authToken = tsmAuthTokenStorage.access_token;
-    const apiURL = `https://pricing-api.tradeskillmaster.com/ah/${auctionHouseID}/item/${req.body.itemID}`
+    console.log(authToken);
+    return( authToken );
+}
+
+async function getItemData(itemID, auctionHouseID) {
+    const authToken = await checkAuthToken();
+    
+    const apiURL = `https://pricing-api.tradeskillmaster.com/ah/${auctionHouseID}/item/${itemID}`
     
     try {
         return await fetch(apiURL, {
@@ -114,14 +130,27 @@ async function getItemData(req, res, auctionHouseID) {
     }
     
     catch (error) {
-        res.status(400).json({ Error: "Couldn't create document due to missing parameters." });  
+        // do nothing
+        return;
     }
 };
 
+// assign auction house ID
+function getAuctionHouseID(faction, realm) {
+    // if no faction or no realm were given
+    if (faction === "" || realm === "") {
+        return;
+    }
+    if (faction === "Alliance") {
+        return(auctionHouseList[realm][0]);
+    }
+    else {
+        return(auctionHouseList[realm][1]);
+    }
+}
 
 // BIG function to add item to list
-app.post ('/items', async function (req,res) { 
-    let auctionHouseID = 0;
+app.post ('/items', async function (req, res) { 
     if (req.body.itemID === '') {
         res.status(400).json({ Error: "Please enter an item ID."});
         return;
@@ -131,26 +160,26 @@ app.post ('/items', async function (req,res) {
         return;
     }
     try {
-        if (req.body.faction === "Alliance") {
-            auctionHouseID = auctionHouseList[req.body.realm][0];
-        }
-        else {
-            auctionHouseID = auctionHouseList[req.body.realm][1];
+        const auctionHouseID = getAuctionHouseID(req.body.faction, req.body.realm);
+        if (auctionHouseID == undefined) {
+            res.status(400).json({ Error: "Please enter a valid realm or faction."});
+            return;
         }
         try {
-            const itemData = await getItemData(req, res, auctionHouseID);
+            const itemData = await getItemData(req.body.itemID, auctionHouseID);
+            console.log(itemData);
 
             // get item data for icon src and item name
-            const item = await getItem(req.body.itemID);
-            let icon = await item.getIcon();
+            const item = await getItemNameIcon(req.body.itemID);
+            let icon = item[1];
             let iconStr = `${icon}`
 
-            if (itemData.status === 404) {
+            if (itemData == undefined || itemData.status === 404) {
                 res.status(404).json({   Error: "Item doesn't exist." });
             }
             else {
                 items.createItem(
-                    item.name, 
+                    item[0], 
                     req.body.itemID, 
                     req.body.realm,
                     req.body.faction,
@@ -254,11 +283,11 @@ app.put('/items/:_id', (req, res) => {
         return;
     }
     else {
-        // console.log(req.body.quantity);
         items.findById(req.params._id)
             .then(item => {
                 if (item !== null) {
                     const update = {};
+
                     // check if parameters are different
                     if (req.body.quantity !== item.quantity) {
                         update.quantity = req.body.quantity;
@@ -330,34 +359,15 @@ app.post('/update-all', async function (req, res) {
         items.findById(item._id)
             .then(async document => {
                 if (document !== null) {
-                    let currentTime = Math.floor(new Date().getTime() / 1000);
-                    if (tsmAuthTokenStorage.access_token === '' || currentTime >=  tsmAuthTokenStorage.time_left){
-                        const authToken = await getAuthToken();
-                        tsmAuthTokenStorage.access_token = authToken.access_token;
-                        tsmAuthTokenStorage.time_left = currentTime + 86400;
-                    }
-                    const authToken = tsmAuthTokenStorage.access_token;
-
-                    let auctionHouseID = 0;
-                    if (req.body.faction === "Alliance") {
-                        auctionHouseID = auctionHouseList[item.realm][0];
-                    }
-                    else {
-                        auctionHouseID = auctionHouseList[item.realm][1];
-                    }
-                    const apiURL = `https://pricing-api.tradeskillmaster.com/ah/${auctionHouseID}/item/${item.itemID}`
-                    let newData = await fetch(apiURL, {
-                        method: 'GET',
-                        headers: {
-                            'Authorization': `Bearer ${authToken}`,
-                        }
-                    });
-                    if (newData.status !== 200) {
+                    const auctionHouseID = getAuctionHouseID(req.body.faction, item.realm)
+                    let newData = await getItemData(item.itemID, auctionHouseID);
+                    
+                    if (newData == undefined) {
                         pass = false;
                     }
 
-                    newData = await newData.json();
                     let update = {};
+
                     // check if update changes anything
                     if (item.currentPrice !== newData.minBuyout) {
                         update.currentPrice = newData.minBuyout;
@@ -372,7 +382,6 @@ app.post('/update-all', async function (req, res) {
                         const documentID = item._id;
                         items.updateItem( { _id: documentID }, update )
                             .then(modifiedCount => {
-                                console.log(modifiedCount);
                                 if (modifiedCount === 1) {
                                     pass = true;
                                 } else {
