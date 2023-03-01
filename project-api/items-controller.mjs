@@ -121,6 +121,28 @@ function getAuctionHouseID(faction, realm) {
     }
 }
 
+const addItem = (req, item, itemData, iconStr) => {
+    items.createItem(
+        item[0], 
+        req.body.itemID, 
+        req.body.realm,
+        req.body.faction,
+        itemData.minBuyout,
+        itemData.marketValue,
+        req.body.time,
+        req.body.quantity,
+        iconStr,
+        itemData.minBuyout * req.body.quantity
+    )
+    .then(item => {
+        return true;
+    })
+    .catch(error => {
+        console.log(error);
+        return false;
+    });           
+}
+
 // BIG function to add item to list
 app.post ('/items', async function (req, res) { 
     if (req.body.itemID === '') {
@@ -131,53 +153,31 @@ app.post ('/items', async function (req, res) {
         res.status(400).json({ Error: "Please enter a quantity."})
         return;
     }
-    try {
-        const auctionHouseID = getAuctionHouseID(req.body.faction, req.body.realm);
-        if (auctionHouseID == undefined) {
-            res.status(400).json({ Error: "Please enter a valid realm or faction."});
-            return;
-        }
-        try {
-            const itemData = await getItemData(req.body.itemID, auctionHouseID);
-            console.log(itemData);
+    const auctionHouseID = getAuctionHouseID(req.body.faction, req.body.realm);
+    if (auctionHouseID == undefined) {
+        res.status(400).json({ Error: "Please enter a valid realm or faction."});
+        return;
+    }
+    const itemData = await getItemData(req.body.itemID, auctionHouseID);
+    console.log(itemData);
 
-            // get item data for icon src and item name
-            const item = await getItemNameIcon(req.body.itemID);
-            let icon = item[1];
-            let iconStr = `${icon}`
+    // get item data for icon src and item name
+    const item = await getItemNameIcon(req.body.itemID);
+    const iconStr = `${item[1]}`
 
-            if (itemData == undefined || itemData.status === 404) {
-                res.status(404).json({   Error: "Item doesn't exist." });
-            }
-            else {
-                items.createItem(
-                    item[0], 
-                    req.body.itemID, 
-                    req.body.realm,
-                    req.body.faction,
-                    itemData.minBuyout,
-                    itemData.marketValue,
-                    req.body.time,
-                    req.body.quantity,
-                    iconStr,
-                    itemData.minBuyout * req.body.quantity
-                )
-                .then(item => {
-                    res.status(201).json(item);
-                })
-                .catch(error => {
-                    console.log(error);
-                    res.status(404).json({ Error: "Item doesn't exist." });
-                });           
-            }
-             
-        }
-        catch(error){
+    if (itemData == undefined || itemData.status === 404) {
+        res.status(404).json({   Error: "Item doesn't exist." });
+    }
+    else {
+        // add item to db and check if it worked
+        const result = addItem(req, item, itemData, iconStr);
+
+        if (result == false) {
             res.status(404).json({ Error: "Item doesn't exist." });
         }
-    }
-    catch(error) {
-        res.status(400).json({ Error: "Please enter a Realm and Faction please." });
+        else {
+            res.status(201).json(item);
+        }
     }
     
 });
@@ -233,92 +233,103 @@ app.delete('/items/:_id', (req, res) => {
         });
 });
 
+function checkDifferentSingle(params) {
+    // params are item, currentPrice, and quantity in that order
+    const item = params[0];
+    const currentPrice = params[1];
+    const quantity = params[2];
+    const update = {};
+
+    // check if parameters are different
+    if (quantity !== item.quantity) {
+        update.quantity = quantity;
+    }
+    if (currentPrice !== item.currentPrice) {
+        update.currentPrice = currentPrice;
+    }
+    if (currentPrice !== item.currentPrice || quantity !== item.quantity) {
+        update.total = quantity * currentPrice;
+    }
+    return update;
+}
+
+function checkDifferentAll(params) {
+    // params are item, newData.minBuyout, and newData.marketValue in that order
+    const item = params[0];
+    const minBuyout = params[1];
+    const marketValue = params[2];
+    const update = {};
+
+    if (item.currentPrice !== minBuyout) {
+        update.currentPrice = minBuyout;
+    }
+    if (item.marketPrice !== marketValue) {
+        update.marketPrice = marketValue;
+    }
+    if (item.currentPrice !== minBuyout || item.marketPrice !== marketValue) {
+        update.total = minBuyout * item.quantity;
+    }
+    return update;
+}
+
+function checkUpdateJSON(req, res) {
+    if (req.body.quantity === undefined) {
+        res.status(400).json({ Error: "Missing parameters for update"});
+        return false;
+    }
+    else if (req.body.quantity <= 0) {
+        res.status(400).json({ Error: "Please enter a positive quantity."});
+        return false;
+    }
+    if (req.body.currentPrice === undefined) {
+        res.status(400).json({ Error: "Missing parameters for update"});
+        return false;
+    }
+    else if (req.body.currentPrice < 0) {
+        res.status(400).json({ Error: 'Please enter a non-negative price.'});
+        return false;
+    }
+    else {
+        return true;
+    }
+}
 
 // UPDATE documents controller ************************************
 // UPDATE not REPLACE
 app.put('/items/:_id', (req, res) => {
     // check if valid json
-    if (req.body.quantity === undefined) {
-        res.status(400).json({ Error: "Missing parameters for update"});
+    if (checkUpdateJSON(req, res) == false) {
         return;
     }
-    else if (req.body.quantity <= 0) {
-        res.status(400).json({ Error: "Please enter a positive quantity."});
-        return;
-    }
-    if (req.body.currentPrice === undefined) {
-        res.status(400).json({ Error: "Missing parameters for update"});
-        return;
-    }
-    else if (req.body.currentPrice < 0) {
-        res.status(400).json({ Error: 'Please enter a non-negative price.'});
-        return;
-    }
-    else {
-        items.findById(req.params._id)
-            .then(item => {
-                if (item !== null) {
-                    const update = {};
-
-                    // check if parameters are different
-                    if (req.body.quantity !== item.quantity) {
-                        update.quantity = req.body.quantity;
+    items.findById(req.params._id)
+    .then(item => {
+        if (item !== null) {
+            const updateParams = [item, req.body.currentPrice, req.body.quantity]
+            const update = checkDifferentSingle(updateParams);
+            if (JSON.stringify(update) !== '{}') {
+                items.updateItem( { _id: req.params._id }, update )
+                .then(modifiedCount => {
+                    if (modifiedCount === 1) {
+                        res.status(200).json();
+                    } else {
+                        res.status(404).json({ Error: "Item was not found (Update)" });
+                        return;
                     }
-                    if (req.body.currentPrice !== item.currentPrice) {
-                        update.currentPrice = req.body.currentPrice;
-                    }
-                    if (req.body.currentPrice !== item.currentPrice || req.body.quantity !== item.quantity) {
-                        update.total = req.body.quantity * req.body.currentPrice;
-                    }
-                    if (JSON.stringify(update) !== '{}') {
-                        items.updateItem( { _id: req.params._id }, update )
-                            .then(modifiedCount => {
-                                if (modifiedCount === 1) {
-                                    res.json({ 
-                                        _id: req.params._id, 
-                                        name: req.body.name, 
-                                        itemID: req.body.itemID, 
-                                        realm: req.body.realm,
-                                        faction: req.body.faction,
-                                        currentPrice: req.body.currentPrice,
-                                        marketPrice: req.body.marketPrice,
-                                        time: req.body.time,
-                                        quantity: req.body.quantity,
-                                        total: req.body.quantity * req.body.currentPrice
-                                    })
-                                } else {
-                                    res.status(404).json({ Error: "Item was not found (Update)" });
-                                    return;
-                                }
-                            })
-                            .catch(error => {
-                                console.error(error);
-                                res.status(400).json({ Error: "Could not update item" });
-                            });
-                    }
-                    else { // Since update had nothing to update, just keep as is and say successful
-                        res.json({ 
-                            _id: req.params._id, 
-                            name: req.body.name, 
-                            itemID: req.body.itemID, 
-                            realm: req.body.realm,
-                            faction: req.body.faction,
-                            currentPrice: req.body.currentPrice,
-                            marketPrice: req.body.marketPrice,
-                            time: req.body.time,
-                            quantity: req.body.quantity,
-                            total: req.body.quantity * req.body.currentPrice
-                        })
-                    }                        
-                }
-                else {
-                    res.status(404).json({ Error: "Item was not found (findByID)"})
-                    return;
-                }
-
-            })
-    }
-    
+                })
+                .catch(error => {
+                    console.error(error);
+                    res.status(400).json({ Error: "Could not update item" });
+                });
+            }
+            else { // Since update had nothing to update, just keep as is and say successful
+                res.status(200).json();
+            }                        
+        }
+        else {
+            res.status(404).json({ Error: "Item was not found (findByID)"})
+            return;
+        }
+    })
 });
 
 // UPDATE ALL
@@ -329,42 +340,33 @@ app.post('/update-all', async function (req, res) {
     for (let i=0; i < length; i++) {
         const item = list[i];
         items.findById(item._id)
-            .then(async document => {
-                if (document !== null) {
-                    const auctionHouseID = getAuctionHouseID(req.body.faction, item.realm)
-                    let newData = await getItemData(item.itemID, auctionHouseID);
-                    
-                    if (newData == undefined) {
-                        pass = false;
-                    }
+        .then(async document => {
+            if (document !== null) {
+                const auctionHouseID = getAuctionHouseID(req.body.faction, item.realm)
+                let newData = await getItemData(item.itemID, auctionHouseID);
+                
+                if (newData == undefined) {
+                    pass = false;
+                }
+                // check if update changes anything
+                const updateParams = [item, newData.minBuyout, newData.marketValue]
+                const update = checkDifferentAll(updateParams);
 
-                    let update = {};
-
-                    // check if update changes anything
-                    if (item.currentPrice !== newData.minBuyout) {
-                        update.currentPrice = newData.minBuyout;
-                    }
-                    if (item.marketPrice !== newData.marketValue) {
-                        update.marketPrice = newData.marketValue;
-                    }
-                    if (item.currentPrice !== newData.minBuyout || item.marketPrice !== newData.marketValue) {
-                        update.total = newData.minBuyout * item.quantity;
-                    }
-                    if (JSON.stringify(update) !== '{}') {
-                        const documentID = item._id;
-                        items.updateItem( { _id: documentID }, update )
-                            .then(modifiedCount => {
-                                if (modifiedCount === 1) {
-                                    pass = true;
-                                } else {
-                                    pass = false;
-                                    console.log(`Did not update ${i} because of updateItem`);
-                                }
-                            })
-                            .catch(error => {
-                                console.error(error);
+                if (JSON.stringify(update) !== '{}') {
+                    const documentID = item._id;
+                    items.updateItem( { _id: documentID }, update )
+                        .then(modifiedCount => {
+                            if (modifiedCount === 1) {
+                                pass = true;
+                            } else {
                                 pass = false;
-                            });
+                                console.log(`Did not update ${i} because of updateItem`);
+                            }
+                        })
+                        .catch(error => {
+                            console.error(error);
+                            pass = false;
+                        });
                     }
                     
                 }
@@ -375,7 +377,7 @@ app.post('/update-all', async function (req, res) {
             })
     }
     if (pass === true) {
-        res.status(200).json()
+        res.status(200).json();
     }
     else {
         res.status(400).json({ Error: "Not all item prices can be updated."})

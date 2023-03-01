@@ -21,7 +21,8 @@ export const EditPage = ({ item }) => {
 
         if (response.status === 200) {
             alert("You edited your shopping list!");
-        } else {
+        } 
+        else {
             const errMessage = await response.json();
             alert(`Could not update item. Status ${response.status}. ${errMessage.Error}`);
         }
