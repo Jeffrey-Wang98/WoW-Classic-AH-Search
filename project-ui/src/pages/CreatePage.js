@@ -2,9 +2,6 @@ import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
 import { Link } from 'react-router-dom';
 
-// const app = express();
-
-
 export const CreatePage = () => {
 
     const [realm, setRealm]                     = useState('');
@@ -26,15 +23,6 @@ export const CreatePage = () => {
         if(response.status === 201){
             alert("Added a new item!");
         } 
-        // else if (response.status === 404){
-        //     alert(`Item does not exist or is not in the auction house. Please check if item ID is valid, status code = ${response.status}`);
-        // }
-        // else if (response.status === 400){
-        //     alert(`Please enter the realm and faction or quantity, status code = ${response.status}`);
-        // }
-        // else {
-        //     alert(`Could not add the item, status code = ${response.status}`);
-        // }
         else{
             const errMessage = await response.json();
             alert(`Could not search item. Status ${response.status}. ${errMessage.Error}`);
@@ -64,18 +52,10 @@ export const CreatePage = () => {
                                 <th>Faction</th>
                                 <th>Item ID</th>
                                 <th>Quantity</th>
-                                {/* <th>Market Price</th>
-                                <th>Search Time</th> */}
                             </tr>
                         </thead>
                         <tbody>
                             <td>
-                                {/* <input
-                                    type="text"
-                                    placeholder="Realm Name"
-                                    value={name}
-                                    onChange={e => setName(e.target.value)} 
-                                    id="name" /> */}
                                 <select 
                                     name="realm"
                                     id="realm"
@@ -138,13 +118,6 @@ export const CreatePage = () => {
                                     onChange={e => setQuantity(e.target.value)}
                                     id="quantity" />
                             </td>
-                            {/* <td>
-                                <input
-                                    type="date"
-                                    value={time}
-                                    onChange={e => setTime(e.target.value)}
-                                    id="time" />
-                            </td> */}
                         </tbody>
                     </table>
                     <button

@@ -1,0 +1,98 @@
+{
+    "0":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_pelt_bear_ruin_05.jpg",
+       "name":"Ruined Leather Scraps",
+       "itemId":2934,
+       "quantity":57
+    },
+    "1":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_leatherscrap_03.jpg",
+       "name":"Light Leather",
+       "itemId":2318,
+       "quantity":380
+    },
+    "2":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_leatherscrap_05.jpg",
+       "name":"Medium Leather",
+       "itemId":2319,
+       "quantity":345
+    },
+    "3":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_pelt_wolf_ruin_03.jpg",
+       "name":"Heavy Hide",
+       "itemId":4235,
+       "quantity":20
+    },
+    "4":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_leatherscrap_07.jpg",
+       "name":"Heavy Leather",
+       "itemId":4234,
+       "quantity":195
+    },
+    "5":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_leatherscrap_08.jpg",
+       "name":"Thick Leather",
+       "itemId":4304,
+       "quantity":450
+    },
+    "6":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_leatherscrap_02.jpg",
+       "name":"Rugged Leather",
+       "itemId":8170,
+       "quantity":475
+    },
+    "7":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_leatherscrap_10.jpg",
+       "name":"Knothide Leather",
+       "itemId":21887,
+       "quantity":450
+    },
+    "8":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_leatherscrap_15.jpg",
+       "name":"Borean Leather",
+       "itemId":33568,
+       "quantity":2200
+    },
+    "9":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_elemental_crystal_shadow.jpg",
+       "name":"Crystallized Shadow or Crystallized Water",
+       "itemId":37703,
+       "quantity":65
+    },
+    "10":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_elemental_eternal_water.jpg",
+       "name":"Eternal Water",
+       "itemId":35622,
+       "quantity":18
+    },
+    "11":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/spell_frost_frozencore.jpg",
+       "name":"Frozen Orb",
+       "itemId":43102,
+       "quantity":15
+    },
+    "12":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_nerubianchitin_01.jpg",
+       "name":"Nerubian Chitin or Icy Dragonscale",
+       "itemId":38558,
+       "quantity":10
+    },
+    "13":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_elemental_eternal_shadow.jpg",
+       "name":"Eternal Shadow",
+       "itemId":35627,
+       "quantity":50
+    },
+    "14":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_elemental_eternal_fire.jpg",
+       "name":"Eternal Fire",
+       "itemId":36860,
+       "quantity":50
+    },
+    "15":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_pelt_14.jpg",
+       "name":"Arctic Fur",
+       "itemId":44128,
+       "quantity":12
+    }
+}

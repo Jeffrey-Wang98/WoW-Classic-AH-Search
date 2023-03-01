@@ -1,0 +1,188 @@
+{
+    "0":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_stone_06.jpg",
+       "name":"Rough Stone",
+       "itemId":2835,
+       "quantity":60
+    },
+    "1":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_02.jpg",
+       "name":"Copper Bar",
+       "itemId":2840,
+       "quantity":66
+    },
+    "2":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_stone_09.jpg",
+       "name":"Coarse Stone",
+       "itemId":2836,
+       "quantity":60
+    },
+    "3":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_fabric_linen_01.jpg",
+       "name":"Linen Cloth",
+       "itemId":2589,
+       "quantity":50
+    },
+    "4":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_01.jpg",
+       "name":"Silver Bar",
+       "itemId":2842,
+       "quantity":5
+    },
+    "5":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_bronze.jpg",
+       "name":"Bronze Bar",
+       "itemId":2841,
+       "quantity":110
+    },
+    "6":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_stone_12.jpg",
+       "name":"Heavy Stone",
+       "itemId":3820,
+       "quantity":60
+    },
+    "7":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_fabric_wool_01.jpg",
+       "name":"Wool Cloth",
+       "itemId":2592,
+       "quantity":60
+    },
+    "8":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_leatherscrap_05.jpg",
+       "name":"Medium Leather",
+       "itemId":2319,
+       "quantity":15
+    },
+    "9":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_steel.jpg",
+       "name":"Steel Bar",
+       "itemId":3859,
+       "quantity":4
+    },
+    "10":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_stone_10.jpg",
+       "name":"Solid Stone",
+       "itemId":7912,
+       "quantity":120
+    },
+    "11":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_06.jpg",
+       "name":"Mithril Bar",
+       "itemId":3860,
+       "quantity":170
+    },
+    "12":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_fabric_mageweave_01.jpg",
+       "name":"Mageweave Cloth",
+       "itemId":4338,
+       "quantity":20
+    },
+    "13":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_stonetablet_07.jpg",
+       "name":"Dense Stone",
+       "itemId":12365,
+       "quantity":60
+    },
+    "14":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_07.jpg",
+       "name":"Thorium Bar",
+       "itemId":12359,
+       "quantity":135
+    },
+    "15":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_fabric_purplefire_01.jpg",
+       "name":"Runecloth",
+       "itemId":14047,
+       "quantity":35
+    },
+    "16":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_feliron.jpg",
+       "name":"Fel Iron Bar",
+       "itemId":23445,
+       "quantity":70
+    },
+    "17":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_elemental_mote_earth01.jpg",
+       "name":"Mote of Earth",
+       "itemId":22573,
+       "quantity":40
+    },
+    "18":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_elemental_mote_fire01.jpg",
+       "name":"Mote of Fire",
+       "itemId":22574,
+       "quantity":20
+    },
+    "19":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_fabric_netherweave.jpg",
+       "name":"Netherweave Cloth",
+       "itemId":21877,
+       "quantity":70
+    },
+    "20":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_10.jpg",
+       "name":"Adamantite Bar",
+       "itemId":23446,
+       "quantity":40
+    },
+    "21":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_cobalt.jpg",
+       "name":"Cobalt Bar",
+       "itemId":36916,
+       "quantity":280
+    },
+    "22":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_yoggthorite.jpg",
+       "name":"Saronite Bar",
+       "itemId":36913,
+       "quantity":555
+    },
+    "23":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_fabric_soulcloth.jpg",
+       "name":"Frostweave Cloth",
+       "itemId":33470,
+       "quantity":7
+    },
+    "24":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_elemental_crystal_water.jpg",
+       "name":"Crystallized Water",
+       "itemId":37705,
+       "quantity":8
+    },
+    "25":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_elemental_eternal_water.jpg",
+       "name":"Eternal Water",
+       "itemId":35622,
+       "quantity":6
+    },
+    "26":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_elemental_eternal_earth.jpg",
+       "name":"Eternal Earth",
+       "itemId":35624,
+       "quantity":1
+    },
+    "27":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_elemental_crystal_fire.jpg",
+       "name":"Crystallized Fire",
+       "itemId":37702,
+       "quantity":5
+    },
+    "28":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_elemental_eternal_fire.jpg",
+       "name":"Eternal Fire",
+       "itemId":36860,
+       "quantity":1
+    },
+    "29":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_leatherscrap_15.jpg",
+       "name":"Borean Leather",
+       "itemId":33568,
+       "quantity":14
+    },
+    "30":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_elemental_eternal_shadow.jpg",
+       "name":"Eternal Shadow",
+       "itemId":35627,
+       "quantity":7
+    }
+}

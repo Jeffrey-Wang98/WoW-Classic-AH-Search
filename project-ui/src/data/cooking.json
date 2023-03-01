@@ -1,0 +1,74 @@
+{
+    "0":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_fish_08.jpg",
+       "name":"Raw Brilliant Smallfish",
+       "itemId":6291,
+       "quantity":35
+    },
+    "1":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_fish_32.jpg",
+       "name":"Raw Longjaw Mud Snapper",
+       "itemId":6289,
+       "quantity":65
+    },
+    "2":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_fish_30.jpg",
+       "name":"Raw Bristle Whisker Catfish",
+       "itemId":6308,
+       "quantity":100
+    },
+    "3":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_food_69.jpg",
+       "name":"Raptor Flesh",
+       "itemId":12184,
+       "quantity":50
+    },
+    "4":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_food_51.jpg",
+       "name":"Zesty Clam Meat",
+       "itemId":7974,
+       "quantity":50
+    },
+    "5":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_fish_23.jpg",
+       "name":"Raw Nightfin Snapper",
+       "itemId":13759,
+       "quantity":40
+    },
+    "6":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_fish_20.jpg",
+       "name":"Raw Whitescale Salmon",
+       "itemId":13889,
+       "quantity":15
+    },
+    "7":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_food_82.jpg",
+       "name":"Buzzard Meat",
+       "itemId":27671,
+       "quantity":30
+    },
+    "8":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_food_71.jpg",
+       "name":"Talbuk Venison",
+       "itemId":27682,
+       "quantity":40
+    },
+    "9":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_food_120_sharkmeat.jpg",
+       "name":"Chilled Meat",
+       "itemId":43013,
+       "quantity":27
+    },
+    "10":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_fish_67.jpg",
+       "name":"Fangtooth Herring",
+       "itemId":41810,
+       "quantity":130
+    },
+    "11":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_ammo_gunpowder_05.jpg",
+       "name":"Northern Spices",
+       "itemId":43007,
+       "quantity":60
+    }
+}

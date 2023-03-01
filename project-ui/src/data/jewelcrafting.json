@@ -1,0 +1,188 @@
+{
+    "0":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_02.jpg",
+       "name":"Copper Bar",
+       "itemId":2840,
+       "quantity":110
+    },
+    "1":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_gem_emerald_03.jpg",
+       "name":"Malachite or Tigerseye",
+       "itemId":774,
+       "quantity":15
+    },
+    "2":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_bronze.jpg",
+       "name":"Bronze Bar",
+       "itemId":2841,
+       "quantity":120
+    },
+    "3":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_01.jpg",
+       "name":"Silver Bar",
+       "itemId":2842,
+       "quantity":40
+    },
+    "4":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_gem_amethyst_01.jpg",
+       "name":"Shadowgem",
+       "itemId":1210,
+       "quantity":20
+    },
+    "5":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_stone_12.jpg",
+       "name":"Heavy Stone",
+       "itemId":3820,
+       "quantity":80
+    },
+    "6":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_gem_crystal_01.jpg",
+       "name":"Lesser Moonstone",
+       "itemId":1705,
+       "quantity":66
+    },
+    "7":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_06.jpg",
+       "name":"Mithril Bar",
+       "itemId":3860,
+       "quantity":142
+    },
+    "8":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_stone_10.jpg",
+       "name":"Solid Stone",
+       "itemId":7912,
+       "quantity":90
+    },
+    "9":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_08.jpg",
+       "name":"Truesilver Bar",
+       "itemId":6037,
+       "quantity":28
+    },
+    "10":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_gem_crystal_02.jpg",
+       "name":"Aquamarine",
+       "itemId":7909,
+       "quantity":35
+    },
+    "11":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_potion_15.jpg",
+       "name":"Flask of Mojo",
+       "itemId":8151,
+       "quantity":40
+    },
+    "12":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_07.jpg",
+       "name":"Thorium Bar",
+       "itemId":12359,
+       "quantity":56
+    },
+    "13":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_gem_ruby_02.jpg",
+       "name":"Star Ruby",
+       "itemId":7910,
+       "quantity":10
+    },
+    "14":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_gem_opal_01.jpg",
+       "name":"Large Opal",
+       "itemId":12799,
+       "quantity":21
+    },
+    "15":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_gem_diamond_01.jpg",
+       "name":"Azerothian Diamond",
+       "itemId":12800,
+       "quantity":20
+    },
+    "16":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_gem_emerald_01.jpg",
+       "name":"Huge Emerald",
+       "itemId":12364,
+       "quantity":20
+    },
+    "17":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_ore_adamantium.jpg",
+       "name":"Adamantite Ore (Prospect Before Going further)",
+       "itemId":23425,
+       "quantity":240
+    },
+    "18":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_gem_ebondraenite_03.jpg",
+       "name":"Shadow Draenite, Golden Draenite, Blood Garnet, Deep Peridot, Azure Moonstone, or Flame Spessarite (Mix)",
+       "itemId":23107,
+       "quantity":40
+    },
+    "19":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_gem_ebondraenite_03.jpg",
+       "name":"Shadow Draenite or Golden Draenite",
+       "itemId":23107,
+       "quantity":15
+    },
+    "20":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_elemental_primal_earth.jpg",
+       "name":"Primal Earth",
+       "itemId":22452,
+       "quantity":12
+    },
+    "21":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_ingot_10.jpg",
+       "name":"Adamantite Bar",
+       "itemId":23446,
+       "quantity":12
+    },
+    "22":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_jewelcrafting_gem_07.jpg",
+       "name":"Dark Jade, Bloodstone, Chalcedony, Huge Citrine, Shadow Crystal, or Sun Crystal (Mix)",
+       "itemId":36932,
+       "quantity":60
+    },
+    "23":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_jewelcrafting_gem_12.jpg",
+       "name":"Bloodstone, Chalcedony, Huge Citrine, or Sun Crystal",
+       "itemId":36917,
+       "quantity":5
+    },
+    "24":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_elemental_eternal_earth.jpg",
+       "name":"Eternal Earth",
+       "itemId":35624,
+       "quantity":24
+    },
+    "25":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_elemental_eternal_shadow.jpg",
+       "name":"Eternal Shadow",
+       "itemId":35627,
+       "quantity":23
+    },
+    "26":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_jewelcrafting_icediamond_01.jpg",
+       "name":"Skyflare Diamond or Earthsiege Diamond",
+       "itemId":41266,
+       "quantity":20
+    },
+    "27":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/spell_frost_frozencore.jpg",
+       "name":"Frozen Orb",
+       "itemId":43102,
+       "quantity":10
+    },
+    "28":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_jewelcrafting_gem_10.jpg",
+       "name":"Chalcedony",
+       "itemId":36923,
+       "quantity":10
+    },
+    "29":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_jewelcrafting_gem_11.jpg",
+       "name":"Shadow Crystal",
+       "itemId":36926,
+       "quantity":10
+    },
+    "30":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_jewelcrafting_gem_07.jpg",
+       "name":"Dark Jade",
+       "itemId":36932,
+       "quantity":10
+    }
+}

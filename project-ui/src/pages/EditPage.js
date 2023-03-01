@@ -1,24 +1,10 @@
 import React from 'react';
-// import { calcGold, calcSilver } from '../components/Item';
+import priceToString from '../components/priceToString';
 import { useHistory } from "react-router-dom";
 import { useState } from 'react';
 
-function priceToString(num) {
-    let gold = Math.floor(num / 10000);
-    let silver = Math.floor((num - gold * 10000) / 100);
-    let copper = num - gold * 10000 - silver * 100;
-    gold = (gold).toLocaleString('en-US', {useGrouping:true});
-    silver = (silver).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
-    copper = (copper).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
-    return(`${gold}g ${silver}s ${copper}c`);
-}
-
 export const EditPage = ({ item }) => {
-    // const [name, setName]                       = useState(item.name);
-    // const [itemID, setItemID]                   = useState(item.itemID);
     const [currentPrice, setCurrentPrice]       = useState(item.currentPrice);
-    // const [marketPrice, setMarketPrice]         = useState(item.marketPrice);
-    // const [time, setTime]                       = useState(item.time);
     const [quantity, setQuantity]                  = useState(item.quantity);
     
     const history = useHistory();
@@ -41,6 +27,8 @@ export const EditPage = ({ item }) => {
         }
         history.push("/");
     }
+    
+    const markStrings = priceToString(item.marketPrice);
 
     return (
         <>
@@ -90,7 +78,14 @@ export const EditPage = ({ item }) => {
                                     id="currentPrice" />
                             </td>
                             <td>
-                                {priceToString(item.marketPrice)}
+                                {markStrings[0]}
+                                <img src='/images/Gold.webp' alt='gold icon'></img>
+                                <span> </span>
+                                {markStrings[1]}
+                                <img src='/images/Silver.webp' alt='silver icon'></img>
+                                <span> </span>
+                                {markStrings[2]}
+                                <img src='/images/Copper.webp' alt='copper icon'></img>
                             </td>
                             <td>
                                 <input

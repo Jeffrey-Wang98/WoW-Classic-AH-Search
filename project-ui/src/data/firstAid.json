@@ -1,0 +1,44 @@
+{
+    "0":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_fabric_linen_01.jpg",
+       "name":"Linen Cloth",
+       "itemId":2589,
+       "quantity":170
+    },
+    "1":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_fabric_wool_01.jpg",
+       "name":"Wool Cloth",
+       "itemId":2592,
+       "quantity":180
+    },
+    "2":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_fabric_silk_01.jpg",
+       "name":"Silk Cloth",
+       "itemId":4306,
+       "quantity":150
+    },
+    "3":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_fabric_mageweave_01.jpg",
+       "name":"Mageweave Cloth",
+       "itemId":4338,
+       "quantity":120
+    },
+    "4":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_fabric_purplefire_01.jpg",
+       "name":"Runecloth",
+       "itemId":14047,
+       "quantity":80
+    },
+    "5":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_fabric_netherweave.jpg",
+       "name":"Netherweave Cloth",
+       "itemId":21877,
+       "quantity":90
+    },
+    "6":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_fabric_soulcloth.jpg",
+       "name":"Frostweave Cloth (Just 80 for lvl 400)",
+       "itemId":33470,
+       "quantity":260
+    }
+}

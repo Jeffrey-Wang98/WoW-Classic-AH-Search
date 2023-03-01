@@ -74,16 +74,14 @@ async function getAuthToken() {
     })
         .then(response => response.json())
         .then(result => {
-            // console.log(result.access_token);
             return result;
         })
         .catch(error => console.log('error', error));
-    
-    // console.log(tsmAuth);
 };
 
-async function getItem(req, res) {
-    let item = await client.wow.classic.getItemById(req.body.itemID);
+async function getItem(itemID) {
+    let item = await client.wow.classic.getItemById(itemID);
+    console.log(item)
     return(item);
 };
 
@@ -141,12 +139,14 @@ app.post ('/items', async function (req,res) {
         }
         try {
             const itemData = await getItemData(req, res, auctionHouseID);
-            const item = await getItem(req, res);
+
+            // get item data for icon src and item name
+            const item = await getItem(req.body.itemID);
             let icon = await item.getIcon();
             let iconStr = `${icon}`
 
             if (itemData.status === 404) {
-                res.status(404).json({ Error: "Item doesn't exist." });
+                res.status(404).json({   Error: "Item doesn't exist." });
             }
             else {
                 items.createItem(
@@ -165,7 +165,7 @@ app.post ('/items', async function (req,res) {
                     res.status(201).json(item);
                 })
                 .catch(error => {
-                    // console.log(error);
+                    console.log(error);
                     res.status(404).json({ Error: "Item doesn't exist." });
                 });           
             }

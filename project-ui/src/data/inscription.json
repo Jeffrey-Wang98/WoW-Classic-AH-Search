@@ -1,0 +1,50 @@
+{
+    "0":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_07.jpg",
+       "name":"Earthroot, Peacebloom, or Silverleaf",
+       "itemId":2449,
+       "quantity":120
+    },
+    "1":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_jewelry_talisman_03.jpg",
+       "name":"Mageroyal, Briarthorn, Bruiseweed, Stranglekelp, or Swiftthistle",
+       "itemId":785,
+       "quantity":110
+    },
+    "2":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_root_02.jpg",
+       "name":"Liferoot, Grave Moss, Kingsblood, or Wild Steelbloom",
+       "itemId":3357,
+       "quantity":170
+    },
+    "3":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_15.jpg",
+       "name":"Goldthorn, Khadgar's Whiskers, Fadeleaf, or Wintersbite",
+       "itemId":3821,
+       "quantity":180
+    },
+    "4":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_19.jpg",
+       "name":"Firebloom, Arthas' Tears, Blindweed, Ghost Mushroom, Gromsblood, Purple Lotus, or Sungrass",
+       "itemId":4625,
+       "quantity":240
+    },
+    "5":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_dreamfoil.jpg",
+       "name":"Dreamfoil, Golden Sansam, Icecap, Mountain Silversage, or Plaguebloom",
+       "itemId":13463,
+       "quantity":120
+    },
+    "6":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_ancientlichen.jpg",
+       "name":"Ancient Lichen, Felweed, Ragveil, Terocone, Nightmare Vine, Netherbloom, Mana Thistle, or Dreaming Glory",
+       "itemId":22790,
+       "quantity":180
+    },
+    "7":{
+       "icon":"https://render.worldofwarcraft.com/classic-us/icons/56/inv_misc_herb_tigerlily.jpg",
+       "name":"Tiger Lily, Icethorn, Lichbloom, Fire Leaf, Fire Seed, Adder's Tongue, Deadnettle, Goldclover, or Talandra's Rose",
+       "itemId":36904,
+       "quantity":500
+    }
+}
