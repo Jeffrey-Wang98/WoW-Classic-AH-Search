@@ -10,38 +10,21 @@ import leatherworking from '../data/leatherworking.json';
 import tailoring from '../data/tailoring.json';
 import cooking from '../data/cooking.json';
 import firstAid from '../data/firstAid.json';
+import auctionHouseList from '../data/auctionHouseList.json';
 
 
-export const ChooseProf = ( {setProfItems, setProfession, realm, faction, setRealm, setFaction } ) => {
+export const ChooseProf = ( { chooseParams } ) => {
+    
+    const setProfItems = chooseParams[0];
+    const setProfession = chooseParams[1];
+    const realm = chooseParams[2];
+    const faction = chooseParams[3];
+    const setRealm = chooseParams[4];
+    const setFaction = chooseParams[5];
+
     const [prof, setProf] = useState('');
 
     const history         = useHistory();
-
-    const auctionHouseList = {
-        Atiesh: [279, 280],
-        Myzrael: [281, 282],
-        Old_Blanchy: [283, 284],
-        Azuresong: [285, 286],
-        Mankrik: [287, 288],
-        Pagle: [289, 290],
-        Ashkandi: [293, 294],
-        Westfall: [295, 296],
-        Whitemane: [297, 298],
-        Faerlina: [311, 312],
-        Grobbulus: [317, 318],
-        Bloodsail_Buccaneers: [319, 320],
-        Remulos: [321, 322],
-        Arugal: [323, 324],
-        Yojamba: [325, 326],
-        Sulfuras: [343, 344],
-        Windseeker: [345, 346],
-        Benediction: [347, 348],
-        Earthfury: [351, 352],
-        Skyfury: [461, 462],
-        Maladath: [463, 464],
-        Eranikus: [471, 472],
-        Angerforge: [473, 474]
-    };
 
     const chooseArray = () => {
         switch (prof) {
@@ -122,6 +105,16 @@ export const ChooseProf = ( {setProfItems, setProfession, realm, faction, setRea
         return itemsForMicro;
     }
 
+    const checkError = (apiPrices, selectedArray) => {
+        if (apiPrices.status === 200) {
+            alert("Your profession list has been generated!");
+            sendProf(apiPrices, selectedArray);
+        }
+        else {
+            alert("There was an error preventing the generation of the professsion list.")
+        }
+    }
+
     // generate profession item price list
     const chooseProf = async () => {
         if (realm === "" || faction === "" || prof === "") {
@@ -139,13 +132,8 @@ export const ChooseProf = ( {setProfItems, setProfession, realm, faction, setRea
             let apiPrices = await getPrices(listForMicro);
 
             // handle success or errors
-            if (apiPrices.status === 200) {
-                alert("Your profession list has been generated!");
-                sendProf(apiPrices, selectedArray);
-            }
-            else {
-                alert("There was an error preventing the generation of the professsion list.")
-            }
+            checkError(apiPrices, selectedArray);
+            
             history.push('/professions');
         }
     }

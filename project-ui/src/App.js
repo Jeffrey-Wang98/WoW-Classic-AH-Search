@@ -23,6 +23,9 @@ function App() {
   const [realm, setRealm] =           useState('');
   const [faction, setFaction] =       useState('');
 
+  const profPageParams = [profItems, profession, realm, faction];
+  const chooseProfParams = [setProfItems, setProfession, realm, faction, setRealm, setFaction];
+
   return (
     <>
       <Router>
@@ -51,11 +54,11 @@ function App() {
             </Route>
 
             <Route path="/professions">
-              <ProfessionsPage profItems={profItems} setProfItems={setProfItems} profession={profession} realm={realm} faction={faction}/>
+              <ProfessionsPage profParams={profPageParams}/>
             </Route>
 
             <Route path="/choose-profession">
-              <ChooseProf profItems={profItems} setProfItems={setProfItems} setProfession={setProfession} realm={realm} faction={faction} setRealm={setRealm} setFaction={setFaction}/>
+              <ChooseProf chooseParams={chooseProfParams}/>
             </Route>
           </main>
 

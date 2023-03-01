@@ -4,7 +4,12 @@ import ProfTotal from '../components/ProfTotal';
 import LinkButton from '../components/LinkButton';
 import { Link } from 'react-router-dom';
 
-export const ProfessionsPage = ( {profItems, profession, realm, faction} ) =>  {
+export const ProfessionsPage = ( {profParams} ) =>  {
+    const profItems = profParams[0];
+    const profession = profParams[1];
+    const realm = profParams[2];
+    const faction = profParams[3];
+
     return(
         <>
             <article>

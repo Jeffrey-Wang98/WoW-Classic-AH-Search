@@ -1,9 +1,10 @@
 import 'dotenv/config';
 import express from 'express';
-import asyncHandler from 'express-async-handler';
 import * as items from './items-model.mjs';
 import { Client }  from 'gadgetzan';
 import fetch from 'node-fetch';
+import auctionHouseList from './auctionHouseList.json' assert { type: "json" };
+
 
 const client = new Client (
     process.env.BATTLE_NET_CLIENT_ID,
@@ -20,33 +21,6 @@ const PORT = process.env.PORT;
 const tsmID = process.env.TSM_CLIENT_ID;
 
 app.use(express.json());
-
-// JSON auction house IDs
-const auctionHouseList = {
-    Atiesh: [279, 280],
-    Myzrael: [281, 282],
-    Old_Blanchy: [283, 284],
-    Azuresong: [285, 286],
-    Mankrik: [287, 288],
-    Pagle: [289, 290],
-    Ashkandi: [293, 294],
-    Westfall: [295, 296],
-    Whitemane: [297, 298],
-    Faerlina: [311, 312],
-    Grobbulus: [317, 318],
-    Bloodsail_Buccaneers: [319, 320],
-    Remulos: [321, 322],
-    Arugal: [323, 324],
-    Yojamba: [325, 326],
-    Sulfuras: [343, 344],
-    Windseeker: [345, 346],
-    Benediction: [347, 348],
-    Earthfury: [351, 352],
-    Skyfury: [461, 462],
-    Maladath: [463, 464],
-    Eranikus: [471, 472],
-    Angerforge: [473, 474]
-};
 
 var tsmAuthTokenStorage = {
     access_token: '',
@@ -80,7 +54,6 @@ async function getAuthToken() {
 
 async function getItemNameIcon(itemID) {
     const item = await client.wow.classic.getItemById(itemID);
-    console.log(item)
 
     // handle the situation where Blizzard's API is down
     if (item == null) {
@@ -106,7 +79,6 @@ async function checkAuthToken() {
         tsmAuthTokenStorage.time_left = currentTime + 86400;
     }
     const authToken = tsmAuthTokenStorage.access_token;
-    console.log(authToken);
     return( authToken );
 }
 
