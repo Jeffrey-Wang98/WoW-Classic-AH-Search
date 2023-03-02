@@ -53,15 +53,20 @@ async function getAuthToken() {
 };
 
 async function getItemNameIcon(itemID) {
-    const item = await client.wow.classic.getItemById(itemID);
+    let item = await client.wow.classic.getItemById(itemID);
 
-    // handle the situation where Blizzard's API is down
+    // handle the situation where Blizzard's Classic API is down
+    // calls the retail version instead
+    if (item == null) {
+        item = await client.wow.retail.getItemById(itemID);
+    }
+    // uses placeholder instead
     if (item == null) {
         const name = "Placeholder Name (Thanks, Blizzard)";
         const icon = "https://wow.zamimg.com/images/wow/icons/large/trade_engineering.jpg";
         return([name, icon]);
     }
-    const icon = item.getIcon();
+    const icon = await item.getIcon();
     return([item.name, icon]);
 };
 
@@ -102,7 +107,6 @@ async function getItemData(itemID, auctionHouseID) {
     }
     
     catch (error) {
-        // do nothing
         return;
     }
 };
@@ -121,6 +125,7 @@ function getAuctionHouseID(faction, realm) {
     }
 }
 
+// adds item to DB. Returns true if passed, false if not.
 const addItem = (req, item, itemData, iconStr) => {
     items.createItem(
         item[0], 
@@ -143,8 +148,7 @@ const addItem = (req, item, itemData, iconStr) => {
     });           
 }
 
-// BIG function to add item to list
-app.post ('/items', async function (req, res) { 
+function checkCreateJSON(req, res) {
     if (req.body.itemID === '') {
         res.status(400).json({ Error: "Please enter an item ID."});
         return;
@@ -153,13 +157,21 @@ app.post ('/items', async function (req, res) {
         res.status(400).json({ Error: "Please enter a quantity."})
         return;
     }
+    return true;
+}
+
+// BIG function to add item to list
+app.post ('/items', async function (req, res) { 
+    if (checkCreateJSON(req, res) == undefined) {
+        console.log('JSON failed.')
+        return;
+    }
     const auctionHouseID = getAuctionHouseID(req.body.faction, req.body.realm);
     if (auctionHouseID == undefined) {
         res.status(400).json({ Error: "Please enter a valid realm or faction."});
         return;
     }
     const itemData = await getItemData(req.body.itemID, auctionHouseID);
-    console.log(itemData);
 
     // get item data for icon src and item name
     const item = await getItemNameIcon(req.body.itemID);
@@ -173,7 +185,7 @@ app.post ('/items', async function (req, res) {
         const result = addItem(req, item, itemData, iconStr);
 
         if (result == false) {
-            res.status(404).json({ Error: "Item doesn't exist." });
+            res.status(404).json({ Error: "Item missing information." });
         }
         else {
             res.status(201).json(item);
@@ -332,6 +344,42 @@ app.put('/items/:_id', (req, res) => {
     })
 });
 
+// checks if item exists in database and if request has valid updates
+async function checkItemAndUpdates(item, req) {
+    let result = new Promise(function(resolve, reject) {
+        items.findById(item._id)
+        .then(async documents =>{
+            const auctionHouseID = getAuctionHouseID(req.body.faction, item.realm);
+            let newData = await getItemData(item.itemID, auctionHouseID);
+            if (newData == undefined || newData.statusCode === 404) {
+                reject("Error");
+            }
+            const updateParams = [item, newData.minBuyout, newData.marketValue];
+            const update = checkDifferentAll(updateParams);
+            resolve(update);
+        })
+        .catch(_ => reject("Error"));
+    });
+    return result;    
+}
+
+// calls updateItem function to update item's price
+// returns true/false if successful/not successful.
+function updatePrice( filter, update) {
+    let result = new Promise(function(resolve, reject) {
+        items.updateItem(filter, update)
+            .then(modifiedCount =>{
+                if (modifiedCount !== 1) {
+                    reject(false);
+                }
+                else {
+                    resolve(true);
+                }
+            })
+    })
+    return result;    
+}
+
 // UPDATE ALL
 app.post('/update-all', async function (req, res) {
     let pass = true;
@@ -339,42 +387,23 @@ app.post('/update-all', async function (req, res) {
     let length = Object.keys(list).length;
     for (let i=0; i < length; i++) {
         const item = list[i];
-        items.findById(item._id)
-        .then(async document => {
-            if (document !== null) {
-                const auctionHouseID = getAuctionHouseID(req.body.faction, item.realm)
-                let newData = await getItemData(item.itemID, auctionHouseID);
-                
-                if (newData == undefined) {
-                    pass = false;
-                }
-                // check if update changes anything
-                const updateParams = [item, newData.minBuyout, newData.marketValue]
-                const update = checkDifferentAll(updateParams);
+        let update = await checkItemAndUpdates(item, req);
 
-                if (JSON.stringify(update) !== '{}') {
-                    const documentID = item._id;
-                    items.updateItem( { _id: documentID }, update )
-                        .then(modifiedCount => {
-                            if (modifiedCount === 1) {
-                                pass = true;
-                            } else {
-                                pass = false;
-                                console.log(`Did not update ${i} because of updateItem`);
-                            }
-                        })
-                        .catch(error => {
-                            console.error(error);
-                            pass = false;
-                        });
-                    }
-                    
-                }
-                else{
-                    pass = false;
-                    console.log(`Did not update ${i} because of findById.`)
-                }
-            })
+        if (update === "Error") {
+            // could not find item in either DB or API calls
+            pass = false;
+            console.log(`Did not update ${i} because of findById.`)
+        }
+        else {
+            if (JSON.stringify(update) === '{}') {
+                // nothing to update, so skip this item
+                continue;
+            }
+            if (await updatePrice( {_id: item._id}, update) === false ) {
+                // could not update item due to missing item or DB error
+                pass = false;
+            }
+        }
     }
     if (pass === true) {
         res.status(200).json();
