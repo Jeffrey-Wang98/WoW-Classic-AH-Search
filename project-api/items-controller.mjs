@@ -191,7 +191,6 @@ app.post ('/items', async function (req, res) {
             res.status(201).json(item);
         }
     }
-    
 });
 
 // RETRIEVE ****************************************************
@@ -306,6 +305,23 @@ function checkUpdateJSON(req, res) {
     }
 }
 
+// calls updateItem function to update item's price
+// returns true/false if successful/not successful.
+function updatePrice( filter, update) {
+    let result = new Promise(function(resolve, reject) {
+        items.updateItem(filter, update)
+            .then(modifiedCount =>{
+                if (modifiedCount !== 1) {
+                    reject(false);
+                }
+                else {
+                    resolve(true);
+                }
+            })
+    })
+    return result;
+}
+
 // UPDATE documents controller ************************************
 // UPDATE not REPLACE
 app.put('/items/:_id', (req, res) => {
@@ -314,24 +330,18 @@ app.put('/items/:_id', (req, res) => {
         return;
     }
     items.findById(req.params._id)
-    .then(item => {
+    .then(async item => {
         if (item !== null) {
             const updateParams = [item, req.body.currentPrice, req.body.quantity]
             const update = checkDifferentSingle(updateParams);
             if (JSON.stringify(update) !== '{}') {
-                items.updateItem( { _id: req.params._id }, update )
-                .then(modifiedCount => {
-                    if (modifiedCount === 1) {
-                        res.status(200).json();
-                    } else {
-                        res.status(404).json({ Error: "Item was not found (Update)" });
-                        return;
-                    }
-                })
-                .catch(error => {
-                    console.error(error);
-                    res.status(400).json({ Error: "Could not update item" });
-                });
+                if (await updatePrice( {_id: req.params._id }, update) === true) {
+                    res.status(200).json()
+                }
+                else {
+                    res.status(404).json({ Error: "Item was not found (Update)" });
+                    return;
+                }
             }
             else { // Since update had nothing to update, just keep as is and say successful
                 res.status(200).json();
@@ -360,23 +370,6 @@ async function checkItemAndUpdates(item, req) {
         })
         .catch(_ => reject("Error"));
     });
-    return result;    
-}
-
-// calls updateItem function to update item's price
-// returns true/false if successful/not successful.
-function updatePrice( filter, update) {
-    let result = new Promise(function(resolve, reject) {
-        items.updateItem(filter, update)
-            .then(modifiedCount =>{
-                if (modifiedCount !== 1) {
-                    reject(false);
-                }
-                else {
-                    resolve(true);
-                }
-            })
-    })
     return result;    
 }
 
