@@ -53,14 +53,11 @@ async function getAuthToken() {
 };
 
 async function getItemNameIcon(itemID) {
-    let item = await client.wow.classic.getItemById(itemID);
+    // Blizzard's Classic API is down, so retail is needed for now
+    // let item = await client.wow.classic.getItemById(itemID);
+    let item = await client.wow.retail.getItemById(itemID);
 
-    // handle the situation where Blizzard's Classic API is down
-    // calls the retail version instead
-    if (item == null) {
-        item = await client.wow.retail.getItemById(itemID);
-    }
-    // uses placeholder instead
+    // handle the situation where Blizzard's API is down
     if (item == null) {
         const name = "Placeholder Name (Thanks, Blizzard)";
         const icon = "https://wow.zamimg.com/images/wow/icons/large/trade_engineering.jpg";
