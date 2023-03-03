@@ -30,6 +30,8 @@ var tsmAuthTokenStorage = {
 // CREATE controller ******************************************
 // via post
 
+// Sends a POST request to TSM API to get an auth token with the
+// token in the .env file
 async function getAuthToken() {
     const tsmJSON = {
         client_id: "c260f00d-1071-409a-992f-dda2e5498536",
@@ -52,6 +54,7 @@ async function getAuthToken() {
         .catch(error => console.log('error', error));
 };
 
+// Calls Blizzard's Web API to get the item name and icon with itemID
 async function getItemNameIcon(itemID) {
     // Blizzard's Classic API is down, so retail is needed for now
     // let item = await client.wow.classic.getItemById(itemID);
@@ -84,28 +87,23 @@ async function checkAuthToken() {
     return( authToken );
 }
 
+// Sends POST request to TSM API with the given itemID and auctionHouseID
 async function getItemData(itemID, auctionHouseID) {
     const authToken = await checkAuthToken();
     
     const apiURL = `https://pricing-api.tradeskillmaster.com/ah/${auctionHouseID}/item/${itemID}`
     
-    try {
-        return await fetch(apiURL, {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${authToken}`,
-            },
-            redirect: 'follow'
+    return await fetch(apiURL, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${authToken}`,
+        },
+        redirect: 'follow'
+    })
+        .then(response => {
+            return(response.json());
         })
-            .then(response => {
-                return(response.json());
-            })
-            .catch(error => console.log('error', error));
-    }
-    
-    catch (error) {
-        return;
-    }
+        .catch(error => console.log('error', error));
 };
 
 // assign auction house ID
@@ -124,7 +122,8 @@ function getAuctionHouseID(faction, realm) {
 
 // adds item to DB. Returns true if passed, false if not.
 const addItem = (req, item, itemData, iconStr) => {
-    items.createItem(
+    const result = new Promise(function(resolve, reject) {
+        items.createItem(
         item[0], 
         req.body.itemID, 
         req.body.realm,
@@ -136,13 +135,15 @@ const addItem = (req, item, itemData, iconStr) => {
         iconStr,
         itemData.minBuyout * req.body.quantity
     )
-    .then(item => {
-        return true;
-    })
-    .catch(error => {
-        console.log(error);
-        return false;
+        .then(_ => {
+            resolve(item);
+        })
+        .catch(error => {
+            console.log(error);
+            reject(error);
     });           
+    })
+    return result;
 }
 
 function checkCreateJSON(req, res) {
@@ -179,14 +180,13 @@ app.post ('/items', async function (req, res) {
     }
     else {
         // add item to db and check if it worked
-        const result = addItem(req, item, itemData, iconStr);
-
-        if (result == false) {
-            res.status(404).json({ Error: "Item missing information." });
-        }
-        else {
+        addItem(req, item, itemData, iconStr)
+        .then(result => {
             res.status(201).json(item);
-        }
+        })
+        .catch(error => {
+            res.status(404).json( {Error: "Item missing information."});
+        })
     }
 });
 
@@ -303,16 +303,16 @@ function checkUpdateJSON(req, res) {
 }
 
 // calls updateItem function to update item's price
-// returns true/false if successful/not successful.
+// resolves/rejects if successful/not successful.
 function updatePrice( filter, update) {
     let result = new Promise(function(resolve, reject) {
         items.updateItem(filter, update)
             .then(modifiedCount =>{
                 if (modifiedCount !== 1) {
-                    reject(false);
+                    reject("Could not update");
                 }
                 else {
-                    resolve(true);
+                    resolve("Success");
                 }
             })
     })
@@ -332,7 +332,7 @@ app.put('/items/:_id', (req, res) => {
             const updateParams = [item, req.body.currentPrice, req.body.quantity]
             const update = checkDifferentSingle(updateParams);
             if (JSON.stringify(update) !== '{}') {
-                if (await updatePrice( {_id: req.params._id }, update) === true) {
+                if (await updatePrice( {_id: req.params._id }, update) === "Success") {
                     res.status(200).json()
                 }
                 else {
@@ -346,7 +346,6 @@ app.put('/items/:_id', (req, res) => {
         }
         else {
             res.status(404).json({ Error: "Item was not found (findByID)"})
-            return;
         }
     })
 });
@@ -359,13 +358,13 @@ async function checkItemAndUpdates(item, req) {
             const auctionHouseID = getAuctionHouseID(req.body.faction, item.realm);
             let newData = await getItemData(item.itemID, auctionHouseID);
             if (newData == undefined || newData.statusCode === 404) {
-                reject("Error");
+                reject("TSM API retrieved nothing");
             }
             const updateParams = [item, newData.minBuyout, newData.marketValue];
             const update = checkDifferentAll(updateParams);
             resolve(update);
         })
-        .catch(_ => reject("Error"));
+        .catch(_ => reject("Item was not found in DB"));
     });
     return result;    
 }
@@ -377,22 +376,21 @@ app.post('/update-all', async function (req, res) {
     let length = Object.keys(list).length;
     for (let i=0; i < length; i++) {
         const item = list[i];
-        let update = await checkItemAndUpdates(item, req);
-
-        if (update === "Error") {
-            // could not find item in either DB or API calls
-            pass = false;
-            console.log(`Did not update ${i} because of findById.`)
-        }
-        else {
-            if (JSON.stringify(update) === '{}') {
-                // nothing to update, so skip this item
-                continue;
-            }
-            if (await updatePrice( {_id: item._id}, update) === false ) {
-                // could not update item due to missing item or DB error
+        let update = await checkItemAndUpdates(item, req)
+            .catch(error => {
                 pass = false;
-            }
+                console.log(`Did not update ${i} because of findById or TSM API returned nothing.`);
+                console.log(error);
+            });
+        console.log(update);
+        if (JSON.stringify(update) === '{}') {
+            // nothing to update, so skip this item
+            continue;
+        }
+        if (await updatePrice( {_id: item._id}, update) !== "Success" ) {
+            // could not update item due to missing item or DB error
+            pass = false;
+            console.log(`Did not update ${i} because of update function could not update item`);
         }
     }
     if (pass === true) {
