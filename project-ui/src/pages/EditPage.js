@@ -76,16 +76,6 @@ export const EditPage = ({ item }) => {
                                     onChange={e => setCurrentPrice(e.target.value)}
                                     id="currentPrice" />
                             </td>
-                            {/* <td>
-                                {markStrings[0]}
-                                <img src='/images/Gold.webp' alt='gold icon'></img>
-                                <span> </span>
-                                {markStrings[1]}
-                                <img src='/images/Silver.webp' alt='silver icon'></img>
-                                <span> </span>
-                                {markStrings[2]}
-                                <img src='/images/Copper.webp' alt='copper icon'></img>
-                            </td> */}
                             <PriceString price={item.marketPrice} />
                             <td>
                                 <input
