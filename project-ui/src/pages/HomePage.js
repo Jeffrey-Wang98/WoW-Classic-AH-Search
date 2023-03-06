@@ -39,42 +39,44 @@ function HomePage({ setItem }) {
                 console.error(`Could not remove item of _id = ${_id}, status code = ${response.status}`)
             }
         }
-        else {
-            // Do nothing!
-        }
-        
     }
 
     // Retrieve items
     useEffect(() => {
         retrieve();
     }, []);
+    
+    // send fetch POST request to item-controller
+    const sendUpdateAllRequest = async (itemsJSON) => {
+        const response = await fetch('/update-all', { 
+            method: 'post', 
+            body: JSON.stringify(itemsJSON),
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+            if (response.status !== 200) {
+                const errMessage = await response.json();
+                alert(`Could not update all item prices. Status code = ${response.status}. ${errMessage.Error}`)
+            }
+            else {
+                alert('Item prices were all updated!');
+    
+                window.location.reload();
+            }
+    }
+    
 
     // Update ALL items
     const onUpdate = async () => {
-        if (window.confirm('Are you sure you want to update all item prices? This is a very costly request. This will also force-reset page, clearing any previous profession searches.')) {
+        const question = 'Are you sure you want to update all item prices? This is a very costly request. This will also force-reset page, clearing any previous profession searches.';
+
+        if (window.confirm(question)) {
             let itemsJSON = {}
             for (let i = 0; i < items.length; i ++) {
                 itemsJSON[i] = items[i];
             }
-
-            const response = await fetch('/update-all', { 
-                method: 'post', 
-                body: JSON.stringify(itemsJSON),
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            });
-                if (response.status !== 200) {
-                    const errMessage = await response.json();
-                    alert(`Could not update all item prices. Status code = ${response.status}. ${errMessage.Error}`)
-                }
-                else {
-                    alert('Item prices were all updated!');
-
-                    window.location.reload();
-                }
-            
+            sendUpdateAllRequest(itemsJSON);            
         }
     }
 

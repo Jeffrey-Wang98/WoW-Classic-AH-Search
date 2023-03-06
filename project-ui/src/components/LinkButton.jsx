@@ -1,3 +1,5 @@
+// Imported solution from https://stackoverflow.com/a/49439893 by Beau Smith
+// Creates a html button that works like a Link component in React
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router'

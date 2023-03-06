@@ -1,5 +1,5 @@
 import React from 'react';
-import priceToString from '../components/priceToString';
+import PriceString from '../components/PriceString';
 import { useHistory } from "react-router-dom";
 import { useState } from 'react';
 
@@ -28,8 +28,6 @@ export const EditPage = ({ item }) => {
         }
         history.push("/");
     }
-    
-    const markStrings = priceToString(item.marketPrice);
 
     return (
         <>
@@ -78,7 +76,7 @@ export const EditPage = ({ item }) => {
                                     onChange={e => setCurrentPrice(e.target.value)}
                                     id="currentPrice" />
                             </td>
-                            <td>
+                            {/* <td>
                                 {markStrings[0]}
                                 <img src='/images/Gold.webp' alt='gold icon'></img>
                                 <span> </span>
@@ -87,7 +85,8 @@ export const EditPage = ({ item }) => {
                                 <span> </span>
                                 {markStrings[2]}
                                 <img src='/images/Copper.webp' alt='copper icon'></img>
-                            </td>
+                            </td> */}
+                            <PriceString price={item.marketPrice} />
                             <td>
                                 <input
                                     type="number"
