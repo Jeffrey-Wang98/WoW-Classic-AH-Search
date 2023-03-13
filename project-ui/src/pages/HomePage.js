@@ -89,6 +89,9 @@ function HomePage({ setItem }) {
                     Here are all of the items you have searched up! To add more, please click on "Search Price" button below!
                     The professions tab will give you all of the prices of items you may need to level a specific profession.
                 </p>
+                <p>
+                    To update all prices in your list, click "Update All" below the list to do so! 
+                </p>
                 <LinkButton to="../search">Search Price</LinkButton>
                 <ItemList 
                     items={items} 
